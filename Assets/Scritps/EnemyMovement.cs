@@ -48,4 +48,9 @@ public class EnemyMovement : MonoBehaviour
             targetIndex = (targetIndex + 1) % points.Length;
         }
     }
+
+    public void SetPath(Transform[] pathPoints)
+    {
+        points = pathPoints;
+    }
 }
