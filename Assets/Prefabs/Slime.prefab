@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3935953346752409978}
   - component: {fileID: 1931677440637061937}
   - component: {fileID: 1844263457958802879}
+  - component: {fileID: -9081012731682744145}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21804914, g: 0.9433962, b: 0.8655796, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,3 +108,15 @@ MonoBehaviour:
   attackRange: 3
   attackDamage: 10
   attackInterval: 1
+--- !u!114 &-9081012731682744145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591275509803541800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5484981a7bd8241b3482323c1182de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeUnit

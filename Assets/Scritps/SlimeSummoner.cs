@@ -1,19 +1,43 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SlimeSummoner : MonoBehaviour
 {
     [SerializeField] private Transform board;
-    [SerializeField] private GameObject slimePrefab;
+    [SerializeField] private SlimeUnit slimePrefab;
+    [SerializeField] private TMP_Text goldText;
     [SerializeField, Min(0)] private int startingGold = 100;
     [SerializeField, Min(1)] private int summonCost = 20;
 
-    private readonly HashSet<Transform> occupiedCells = new();
     private int gold;
 
     private void Awake()
     {
         gold = startingGold;
+        UpdateGoldText();
+    }
+
+    private void OnEnable()
+    {
+        EnemyHealth.EnemyDefeated += AddGold;
+    }
+
+    private void OnDisable()
+    {
+        EnemyHealth.EnemyDefeated -= AddGold;
+    }
+
+    private void AddGold(int amount)
+    {
+        gold += amount;
+        UpdateGoldText();
+    }
+
+    private void UpdateGoldText()
+    {
+        if (goldText != null)
+            goldText.text = $"골드: {gold}";
     }
 
     public void Summon()
@@ -30,13 +54,12 @@ public class SlimeSummoner : MonoBehaviour
             return;
         }
 
-        List<Transform> emptyCells = new();
+        List<BoardCell> emptyCells = new();
 
-        foreach (Transform cell in board)
+        foreach (Transform child in board)
         {
-            // BoardGrid가 생성한 칸만 확인합니다.
-            if (cell.name.StartsWith("Cell_") &&
-                !occupiedCells.Contains(cell))
+            if (child.TryGetComponent(out BoardCell cell) &&
+                cell.IsEmpty)
             {
                 emptyCells.Add(cell);
             }
@@ -48,20 +71,23 @@ public class SlimeSummoner : MonoBehaviour
             return;
         }
 
-        Transform selectedCell =
+        BoardCell selectedCell =
             emptyCells[Random.Range(0, emptyCells.Count)];
 
-        // 칸의 크기에 영향을 받지 않도록 Board 아래에 생성합니다.
-        Instantiate(
+        SlimeUnit unit = Instantiate(
             slimePrefab,
-            selectedCell.position,
+            selectedCell.transform.position,
             Quaternion.identity,
             board
         );
 
-        occupiedCells.Add(selectedCell);
-        gold -= summonCost;
+        if (!unit.TryMoveTo(selectedCell))
+        {
+            Destroy(unit.gameObject);
+            return;
+        }
 
-        Debug.Log($"소환 완료! 남은 골드: {gold}", this);
+        gold -= summonCost;
+        UpdateGoldText();
     }
 }
