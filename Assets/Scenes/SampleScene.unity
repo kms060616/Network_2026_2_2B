@@ -1038,6 +1038,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimeSummoner
   board: {fileID: 117094815}
   slimePrefab: {fileID: -9081012731682744145, guid: 7aa7e8c944c53db44ad6ad77038c71c2, type: 3}
+  summonData:
+  - {fileID: 11400000, guid: 9870ea5977b2c5e4ab9b43c344257648, type: 2}
+  - {fileID: 11400000, guid: 98ab2384b12efd244917e470b9a5ef99, type: 2}
   goldText: {fileID: 1722607288}
   startingGold: 100
   summonCost: 20

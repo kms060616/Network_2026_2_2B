@@ -1,30 +1,39 @@
 using UnityEngine;
 
+
+
+[RequireComponent(typeof(SlimeUnit))]
 public class SlimeAttack : MonoBehaviour
 {
-    [SerializeField, Min(0f)] private float attackRange = 3f;
-    [SerializeField, Min(0f)] private float attackDamage = 10f;
-    [SerializeField, Min(0.01f)] private float attackInterval = 1f;
-
+    private SlimeUnit unit;
     private EnemyHealth target;
     private float cooldown;
 
+    private void Awake()
+    {
+        unit = GetComponent<SlimeUnit>();
+    }
+
     private void Update()
     {
+        SlimeData data = unit.Data;
+
+        if (data == null)
+            return;
+
         cooldown = Mathf.Max(0f, cooldown - Time.deltaTime);
 
-        // 현재 적이 죽거나 사거리 밖으로 나가면 다시 선택합니다.
-        if (!IsValidTarget(target))
-            target = FindNearestEnemy();
+        if (!IsValidTarget(target, data.attackRange))
+            target = FindNearestEnemy(data.attackRange);
 
         if (target == null || cooldown > 0f)
             return;
 
-        target.TakeDamage(attackDamage);
-        cooldown = Mathf.Max(0.01f, attackInterval);
+        target.TakeDamage(data.attackDamage);
+        cooldown = Mathf.Max(0.01f, data.attackInterval);
     }
 
-    private bool IsValidTarget(EnemyHealth enemy)
+    private bool IsValidTarget(EnemyHealth enemy, float range)
     {
         if (enemy == null || enemy.IsDead ||
             !enemy.isActiveAndEnabled)
@@ -32,25 +41,29 @@ public class SlimeAttack : MonoBehaviour
             return false;
         }
 
-        Vector2 offset = enemy.transform.position - transform.position;
-        return offset.sqrMagnitude <= attackRange * attackRange;
+        Vector2 offset =
+            enemy.transform.position - transform.position;
+
+        return offset.sqrMagnitude <= range * range;
     }
 
-    private EnemyHealth FindNearestEnemy()
+    private EnemyHealth FindNearestEnemy(float range)
     {
         EnemyHealth[] enemies = FindObjectsByType<EnemyHealth>(
             FindObjectsSortMode.None
         );
 
         EnemyHealth nearest = null;
-        float nearestDistanceSquared = attackRange * attackRange;
+        float nearestDistanceSquared = range * range;
 
         foreach (EnemyHealth enemy in enemies)
         {
-            if (!IsValidTarget(enemy))
+            if (!IsValidTarget(enemy, range))
                 continue;
 
-            Vector2 offset = enemy.transform.position - transform.position;
+            Vector2 offset =
+                enemy.transform.position - transform.position;
+
             float distanceSquared = offset.sqrMagnitude;
 
             if (nearest == null ||
@@ -64,10 +77,17 @@ public class SlimeAttack : MonoBehaviour
         return nearest;
     }
 
-    // Scene 화면에서 선택한 슬라임의 사거리를 표시합니다.
     private void OnDrawGizmosSelected()
     {
+        SlimeUnit slime = GetComponent<SlimeUnit>();
+
+        if (slime == null || slime.Data == null)
+            return;
+
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(
+            transform.position,
+            slime.Data.attackRange
+        );
     }
 }

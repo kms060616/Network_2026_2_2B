@@ -6,7 +6,9 @@ public class SlimeSummoner : MonoBehaviour
 {
     [SerializeField] private Transform board;
     [SerializeField] private SlimeUnit slimePrefab;
+    [SerializeField] private SlimeData[] summonData;
     [SerializeField] private TMP_Text goldText;
+
     [SerializeField, Min(0)] private int startingGold = 100;
     [SerializeField, Min(1)] private int summonCost = 20;
 
@@ -71,6 +73,33 @@ public class SlimeSummoner : MonoBehaviour
             return;
         }
 
+        SlimeGrade grade = Random.value < 0.8f
+            ? SlimeGrade.Common
+            : SlimeGrade.Rare;
+
+        List<SlimeData> candidates = new();
+
+        if (summonData != null)
+        {
+            foreach (SlimeData data in summonData)
+            {
+                if (data != null && data.grade == grade)
+                    candidates.Add(data);
+            }
+        }
+
+        if (candidates.Count == 0)
+        {
+            Debug.LogWarning(
+                $"{grade} 등급의 소환 데이터를 등록해주세요.",
+                this
+            );
+            return;
+        }
+
+        SlimeData selectedData =
+            candidates[Random.Range(0, candidates.Count)];
+
         BoardCell selectedCell =
             emptyCells[Random.Range(0, emptyCells.Count)];
 
@@ -80,6 +109,8 @@ public class SlimeSummoner : MonoBehaviour
             Quaternion.identity,
             board
         );
+
+        unit.Initialize(selectedData);
 
         if (!unit.TryMoveTo(selectedCell))
         {
