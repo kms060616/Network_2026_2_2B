@@ -1,8 +1,12 @@
+using TMPro;
 using UnityEngine;
 
 public class BoardInput : MonoBehaviour
 {
     public static BoardInput Instance { get; private set; }
+
+    [SerializeField] private bool mergeMode = true;
+    [SerializeField] private TMP_Text modeText;
 
     private SlimeUnit selectedUnit;
     private BoardCell selectedCell;
@@ -19,12 +23,33 @@ public class BoardInput : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        UpdateModeText();
+    }
+
+    public void ToggleMode()
+    {
+        ClearSelection();
+        mergeMode = !mergeMode;
+        UpdateModeText();
+    }
+
+    private void UpdateModeText()
+    {
+        if (modeText != null)
+        {
+            modeText.text = mergeMode
+                ? "현재: 합성 모드"
+                : "현재: 교체 모드";
+        }
+    }
+
     public void HandleCellClick(BoardCell clickedCell)
     {
         if (clickedCell == null)
             return;
 
-        // 선택 중인 유닛이 삭제됐다면 선택 표시도 정리합니다.
         if (selectedUnit == null)
             ClearSelection();
 
@@ -37,7 +62,6 @@ public class BoardInput : MonoBehaviour
             );
         }
 
-        // 선택된 유닛이 없으면 클릭한 유닛을 선택합니다.
         if (selectedUnit == null)
         {
             if (clickedUnit != null)
@@ -46,7 +70,6 @@ public class BoardInput : MonoBehaviour
             return;
         }
 
-        // 같은 칸을 다시 누르면 선택을 해제합니다.
         if (clickedCell == selectedCell)
         {
             ClearSelection();
@@ -61,7 +84,14 @@ public class BoardInput : MonoBehaviour
         }
         else if (clickedUnit != null)
         {
-            completed = selectedUnit.TrySwapWith(clickedUnit);
+            if (mergeMode && selectedUnit.CanMergeWith(clickedUnit))
+            {
+                completed = selectedUnit.TryMergeInto(clickedUnit);
+            }
+            else
+            {
+                completed = selectedUnit.TrySwapWith(clickedUnit);
+            }
         }
 
         if (completed)

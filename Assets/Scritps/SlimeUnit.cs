@@ -126,4 +126,50 @@ public class SlimeUnit : MonoBehaviour
             CurrentCell.SetSelected(false);
         }
     }
+
+    public bool TryMergeInto(SlimeUnit other)
+    {
+        if (!CanMergeWith(other))
+            return false;
+
+        BoardCell sourceCell = CurrentCell;
+        BoardCell destinationCell = other.CurrentCell;
+
+        if (sourceCell == null || destinationCell == null ||
+            sourceCell == destinationCell ||
+            sourceCell.Occupant != gameObject ||
+            destinationCell.Occupant != other.gameObject)
+        {
+            return false;
+        }
+
+        SlimeData result = data.mergeResult;
+        SlimeGrade nextGrade = (SlimeGrade)((int)data.grade + 1);
+
+        // 합성 결과 설정이 잘못되면 합성을 취소합니다.
+        if (result.element != data.element ||
+            result.grade != nextGrade ||
+            other.data.mergeResult != result)
+        {
+            Debug.LogWarning(
+                "두 유닛의 Merge Result를 같은 속성의 다음 등급으로 연결해주세요.",
+                this
+            );
+            return false;
+        }
+
+        // 두 번째로 누른 유닛을 상위 유닛으로 변경합니다.
+        other.Initialize(result);
+
+        // 처음 선택한 유닛의 칸을 비우고 유닛을 제거합니다.
+        sourceCell.ClearUnit();
+        sourceCell.SetSelected(false);
+        CurrentCell = null;
+
+        // Destroy가 완료되기 전 추가 공격과 입력을 막습니다.
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+
+        return true;
+    }
 }
