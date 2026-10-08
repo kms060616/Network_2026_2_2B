@@ -1,9 +1,14 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
     public static event Action<int> EnemyDefeated;
+
+    private static readonly HashSet<EnemyHealth> aliveEnemies = new();
+
+    public static int AliveCount => aliveEnemies.Count;
 
     [SerializeField, Min(1f)] private float maxHealth = 30f;
     [SerializeField, Min(0)] private int goldReward = 10;
@@ -11,9 +16,41 @@ public class EnemyHealth : MonoBehaviour
     public float CurrentHealth { get; private set; }
     public bool IsDead { get; private set; }
 
+    // Play를 새로 시작할 때 이전 실행의 정보를 초기화합니다.
+    [RuntimeInitializeOnLoadMethod(
+        RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        aliveEnemies.Clear();
+        EnemyDefeated = null;
+    }
+
     private void Awake()
     {
         CurrentHealth = maxHealth;
+    }
+
+    private void OnEnable()
+    {
+        if (!IsDead)
+            aliveEnemies.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        aliveEnemies.Remove(this);
+    }
+
+    public void Configure(float health, int reward)
+    {
+        maxHealth = Mathf.Max(1f, health);
+        goldReward = Mathf.Max(0, reward);
+
+        CurrentHealth = maxHealth;
+        IsDead = false;
+
+        if (isActiveAndEnabled)
+            aliveEnemies.Add(this);
     }
 
     public void TakeDamage(float damage)
@@ -25,8 +62,10 @@ public class EnemyHealth : MonoBehaviour
 
         if (CurrentHealth <= 0f)
         {
-            // 중복 처치 보상을 막습니다.
             IsDead = true;
+
+            // Destroy 완료를 기다리지 않고 적 수에서 제외합니다.
+            aliveEnemies.Remove(this);
 
             EnemyDefeated?.Invoke(goldReward);
             Destroy(gameObject);
