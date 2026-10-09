@@ -1,6 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System.Collections;
 
 public class WaveManager : MonoBehaviour
 {
@@ -27,6 +28,17 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text enemyCountText;
     [SerializeField] private TMP_Text statusText;
+
+    [Header("보스")]
+    [SerializeField] private EnemyMovement bossPrefab;
+    [SerializeField, Min(1)] private int bossEveryWaves = 10;
+    [SerializeField, Min(0.1f)] private float bossTimeLimit = 180f;
+    [SerializeField, Min(1f)] private float firstBossHealth = 300f;
+    [SerializeField, Min(0f)] private float bossHealthGrowth = 200f;
+    [SerializeField, Min(0)] private int bossGoldReward = 100;
+    [SerializeField] private TMP_Text bossText;
+
+    private readonly List<BossTimer> bosses = new();
 
     private int currentWave;
     private int pendingSpawns;
@@ -74,6 +86,17 @@ public class WaveManager : MonoBehaviour
             }
         }
 
+        if (bossPrefab == null ||
+    bossPrefab.GetComponent<EnemyHealth>() == null ||
+    bossPrefab.GetComponent<BossTimer>() == null)
+        {
+            Debug.LogError(
+                "Boss 프리팹에 EnemyHealth와 BossTimer를 연결해주세요.",
+                this
+            );
+            return false;
+        }
+
         return true;
     }
 
@@ -117,7 +140,12 @@ public class WaveManager : MonoBehaviour
                     $"웨이브 {currentWave}/{totalWaves}";
             }
         }
+        if (!ready)
+            return;
+        UpdateBossText();
     }
+
+
 
     private int RemainingSeconds()
     {
@@ -129,13 +157,27 @@ public class WaveManager : MonoBehaviour
     private IEnumerator RunWaves()
     {
         nextWaveTime = Time.time + Mathf.Max(0f, preparationTime);
+
         yield return new WaitForSeconds(
             Mathf.Max(0f, preparationTime)
         );
 
-        for (int wave = 1; wave <= Mathf.Max(1, totalWaves); wave++)
+        int waveCount = Mathf.Max(1, totalWaves);
+        int bossInterval = Mathf.Max(1, bossEveryWaves);
+
+        for (int wave = 1; wave <= waveCount; wave++)
         {
             currentWave = wave;
+
+            // 보스 웨이브에도 일반 적은 등장합니다.
+            if (wave % bossInterval == 0)
+            {
+                int bossNumber = wave / bossInterval;
+                SpawnBoss(bossNumber);
+
+                if (gameEnded)
+                    yield break;
+            }
 
             float health = firstWaveHealth +
                 (wave - 1) * healthGrowthPerWave;
@@ -145,7 +187,10 @@ public class WaveManager : MonoBehaviour
 
             StartCoroutine(SpawnWave(health, count));
 
-            if (wave < totalWaves)
+            if (gameEnded)
+                yield break;
+
+            if (wave < waveCount)
             {
                 nextWaveTime = Time.time +
                     Mathf.Max(0.1f, waveInterval);
@@ -157,13 +202,73 @@ public class WaveManager : MonoBehaviour
         }
 
         if (statusText != null)
-            statusText.text = "남은 적을 모두 처치하세요.";
+            statusText.text = "보스와 남은 적을 모두 처치하세요.";
 
-        // 마지막 웨이브의 생성과 처치가 모두 끝나야 클리어합니다.
         while (pendingSpawns > 0 || EnemyHealth.AliveCount > 0)
             yield return null;
 
         EndGame(true);
+    }
+
+    private void SpawnBoss(int bossNumber)
+    {
+        EnemyMovement boss = Instantiate(
+            bossPrefab,
+            points[0].position,
+            Quaternion.identity
+        );
+
+        boss.name = $"Boss_{currentWave}";
+        boss.SetPath(points);
+
+        float health = firstBossHealth +
+            (bossNumber - 1) * bossHealthGrowth;
+
+        boss.GetComponent<EnemyHealth>().Configure(
+            health,
+            bossGoldReward
+        );
+
+        BossTimer timer = boss.GetComponent<BossTimer>();
+
+        int appearedWave = currentWave;
+
+        timer.Initialize(
+            bossTimeLimit,
+            () => EndGame(
+                false,
+                $"{appearedWave}웨이브 보스 제한 시간 초과!"
+            )
+        );
+
+        bosses.Add(timer);
+
+        if (EnemyHealth.AliveCount > enemyLimit)
+            EndGame(false);
+    }
+
+    private void UpdateBossText()
+    {
+        bosses.RemoveAll(boss => boss == null || !boss.IsAlive);
+
+        if (bossText == null)
+            return;
+
+        string text = "";
+
+        foreach (BossTimer boss in bosses)
+        {
+            int seconds = Mathf.CeilToInt(boss.RemainingTime);
+            int minutes = seconds / 60;
+            int remainingSeconds = seconds % 60;
+
+            if (text.Length > 0)
+                text += "\n";
+
+            text += $"{boss.name}: {minutes}:{remainingSeconds:00}";
+        }
+
+        bossText.text = text;
     }
 
     private IEnumerator SpawnWave(float health, int count)
@@ -199,7 +304,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void EndGame(bool cleared)
+    private void EndGame(bool cleared, string reason = null)
     {
         if (gameEnded)
             return;
@@ -207,21 +312,15 @@ public class WaveManager : MonoBehaviour
         gameEnded = true;
         StopAllCoroutines();
 
+        string message = cleared
+            ? "테스트 클리어!"
+            : reason ?? $"패배! 적이 {enemyLimit}마리를 넘었습니다.";
+
         if (statusText != null)
-        {
-            statusText.text = cleared
-                ? "테스트 클리어!"
-                : $"패배! 적이 {enemyLimit}마리를 넘었습니다.";
-        }
+            statusText.text = message;
 
-        Debug.Log(cleared ? "테스트 클리어" : "패배", this);
+        Debug.Log(message, this);
 
-        // 적 이동과 공격을 정지합니다.
         Time.timeScale = 0f;
-    }
-
-    private void OnDestroy()
-    {
-        Time.timeScale = 1f;
     }
 }
