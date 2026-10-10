@@ -38,6 +38,13 @@ public class WaveManager : MonoBehaviour
     [SerializeField, Min(0)] private int bossGoldReward = 100;
     [SerializeField] private TMP_Text bossText;
 
+    [Header("결과 화면")]
+    [SerializeField] private ResultUI resultUI;
+
+    public bool IsGameEnded => gameEnded;
+
+    private float sessionStartTime;
+
     private readonly List<BossTimer> bosses = new();
 
     private int currentWave;
@@ -60,6 +67,9 @@ public class WaveManager : MonoBehaviour
 
         ready = true;
         StartCoroutine(RunWaves());
+
+        Time.timeScale = 1f;
+        sessionStartTime = Time.time;
     }
 
     private bool ValidateSetup()
@@ -313,11 +323,25 @@ public class WaveManager : MonoBehaviour
         StopAllCoroutines();
 
         string message = cleared
-            ? "테스트 클리어!"
-            : reason ?? $"패배! 적이 {enemyLimit}마리를 넘었습니다.";
+            ? "모든 웨이브를 완료했습니다."
+            : reason ?? $"적이 {enemyLimit}마리를 넘었습니다.";
 
         if (statusText != null)
             statusText.text = message;
+
+        // 선택 표시를 정리하고 배치 입력을 중지합니다.
+        if (BoardInput.Instance != null)
+            BoardInput.Instance.enabled = false;
+
+        if (resultUI != null)
+        {
+            resultUI.Show(
+                cleared,
+                message,
+                currentWave,
+                Time.time - sessionStartTime
+            );
+        }
 
         Debug.Log(message, this);
 

@@ -12,6 +12,7 @@ public class SlimeSummoner : MonoBehaviour
     [SerializeField, Min(0)] private int startingGold = 100;
     [SerializeField, Min(1)] private int summonCost = 20;
 
+    [SerializeField] private WaveManager waveManager;
     private int gold;
 
     private void Awake()
@@ -44,6 +45,8 @@ public class SlimeSummoner : MonoBehaviour
 
     public void Summon()
     {
+        if (waveManager != null && waveManager.IsGameEnded)
+            return;
         if (board == null || slimePrefab == null)
         {
             Debug.LogError("Board와 Slime 프리팹을 연결해주세요.", this);

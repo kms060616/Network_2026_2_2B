@@ -30,6 +30,8 @@ public class BoardInput : MonoBehaviour
 
     public void ToggleMode()
     {
+        if (!isActiveAndEnabled)
+            return;
         ClearSelection();
         mergeMode = !mergeMode;
         UpdateModeText();
@@ -47,6 +49,8 @@ public class BoardInput : MonoBehaviour
 
     public void HandleCellClick(BoardCell clickedCell)
     {
+        if (!isActiveAndEnabled)
+            return;
         if (clickedCell == null)
             return;
 
