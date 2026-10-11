@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86fb899d2da53674a93670e983573635, type: 3}
-  m_Name: Water_Rare
+  m_Name: water_common
   m_EditorClassIdentifier: Assembly-CSharp::SlimeData
-  unitName: "\uD76C\uADC0 \uBB3C \uC2AC\uB77C\uC784"
+  unitName: "\uC77C\uBC18 \uBB3C \uC2AC\uB77C\uC784"
   element: 0
-  grade: 1
+  grade: 0
   sprite: {fileID: 0}
-  color: {r: 0.2971698, g: 0.6932089, b: 1, a: 1}
+  color: {r: 0.3, g: 0.65, b: 1, a: 1}
   attackDamage: 10
   attackInterval: 1
-  attackRange: 3
-  mergeResult: {fileID: 0}
+  attackRange: 2
+  mergeResult: {fileID: 11400000, guid: 36f37e40857abc74690233483c03f74b, type: 2}
