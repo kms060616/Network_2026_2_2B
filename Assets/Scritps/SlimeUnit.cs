@@ -172,4 +172,18 @@ public class SlimeUnit : MonoBehaviour
 
         return true;
     }
+    public float AttackDamage
+    {
+        get
+        {
+            if (data == null)
+                return 0f;
+
+            float multiplier = SynergyManager.Instance != null
+                ? SynergyManager.Instance.GetAttackMultiplier(data.element)
+                : 1f;
+
+            return data.attackDamage * multiplier;
+        }
+    }
 }

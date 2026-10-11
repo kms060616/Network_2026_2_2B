@@ -29,7 +29,7 @@ public class SlimeAttack : MonoBehaviour
         if (target == null || cooldown > 0f)
             return;
 
-        target.TakeDamage(data.attackDamage);
+        target.TakeDamage(unit.AttackDamage);
         cooldown = Mathf.Max(0.01f, data.attackInterval);
     }
 
