@@ -12,6 +12,10 @@ public class SynergyManager : MonoBehaviour
     [SerializeField, Min(0f)] private float attackBonus = 0.3f;
     [SerializeField, Range(0f, 1f)] private float attackPenalty = 0.1f;
 
+    [Header("연계 시너지")]
+    [SerializeField, Min(0f)]
+    private float growthAttackSpeedBonus = 0.2f;
+
     // 조건을 달성한 순서를 보관합니다.
     private readonly List<SlimeElement> qualifiedOrder = new();
 
@@ -126,6 +130,14 @@ public class SynergyManager : MonoBehaviour
         }
 
         synergyText.text = text;
+
+        bool growthActive =
+    IsSynergyActive(SlimeElement.Water) &&
+    IsSynergyActive(SlimeElement.Grass);
+
+        text += growthActive
+            ? $"\n연계: 성장 · 물/풀 공격속도 +{growthAttackSpeedBonus * 100f:0}%"
+            : "\n연계: 없음";
     }
 
     private static string ElementName(SlimeElement element)
@@ -145,4 +157,32 @@ public class SynergyManager : MonoBehaviour
         if (Instance == this)
             Instance = null;
     }
+
+    public bool IsSynergyActive(SlimeElement element)
+    {
+        if (!isActiveAndEnabled)
+            return false;
+
+        int position = qualifiedOrder.IndexOf(element);
+
+        // 대기 중인 시너지는 연계에 포함하지 않습니다.
+        return position >= 0 && position < 2;
+    }
+
+    public float GetAttackSpeedMultiplier(SlimeElement element)
+    {
+        bool growthActive =
+            IsSynergyActive(SlimeElement.Water) &&
+            IsSynergyActive(SlimeElement.Grass);
+
+        bool affectedUnit =
+            element == SlimeElement.Water ||
+            element == SlimeElement.Grass;
+
+        if (growthActive && affectedUnit)
+            return 1f + growthAttackSpeedBonus;
+
+        return 1f;
+    }
+
 }

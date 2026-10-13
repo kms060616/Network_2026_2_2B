@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fb899d2da53674a93670e983573635, type: 3}
+  m_Name: grass_hero
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeData
+  unitName: "\uC601\uC6C5 \uD480 \uC2AC\uB77C\uC784"
+  element: 2
+  grade: 2
+  sprite: {fileID: 0}
+  color: {r: 0.3, g: 0.85, b: 0.35, a: 1}
+  attackDamage: 40
+  attackInterval: 0.6
+  attackRange: 2.5
+  mergeResult: {fileID: 11400000, guid: 8278226866f3e344aa3a9c03f06ac869, type: 2}

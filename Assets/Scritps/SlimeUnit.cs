@@ -186,4 +186,24 @@ public class SlimeUnit : MonoBehaviour
             return data.attackDamage * multiplier;
         }
     }
+
+    public float AttackInterval
+    {
+        get
+        {
+            if (data == null)
+                return 1f;
+
+            float speedMultiplier = SynergyManager.Instance != null
+                ? SynergyManager.Instance.GetAttackSpeedMultiplier(
+                    data.element
+                )
+                : 1f;
+
+            return Mathf.Max(
+                0.01f,
+                data.attackInterval / speedMultiplier
+            );
+        }
+    }
 }

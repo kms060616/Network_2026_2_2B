@@ -3,3 +3,7 @@ water_common,일반 물 슬라임,Water,Common,10,1,2,water_rare
 water_rare,희귀 물 슬라임,Water,Rare,25,1.2,3,water_hero
 water_hero,영웅 물 슬라임,Water,Hero,55,1,3,water_legendary
 water_legendary,전설 물 슬라임,Water,Legendary,120,0.8,3.5,
+grass_common,일반 풀 슬라임,Grass,Common,7,0.7,2,grass_rare
+grass_rare,희귀 풀 슬라임,Grass,Rare,18,0.7,2.5,grass_hero
+grass_hero,영웅 풀 슬라임,Grass,Hero,40,0.6,2.5,grass_legendary
+grass_legendary,전설 풀 슬라임,Grass,Legendary,85,0.5,3,

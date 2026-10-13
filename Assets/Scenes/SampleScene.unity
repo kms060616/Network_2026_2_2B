@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6666667}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2074,6 +2074,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e5ea5a142cf229b4882e110d035b6683, type: 2}
   - {fileID: 11400000, guid: 20ef2da75d9c27943805c67603645ea2, type: 2}
   - {fileID: 11400000, guid: 36f37e40857abc74690233483c03f74b, type: 2}
+  - {fileID: 11400000, guid: 6a339f37e4639ed42b210797818a6a57, type: 2}
+  - {fileID: 11400000, guid: 5c9a7978dae274d4481cf18f15f0036a, type: 2}
+  - {fileID: 11400000, guid: 8278226866f3e344aa3a9c03f06ac869, type: 2}
+  - {fileID: 11400000, guid: 7606edbba33acf84ca807036b467b1ca, type: 2}
   goldText: {fileID: 1722607288}
   startingGold: 100
   summonCost: 20
@@ -2402,7 +2406,7 @@ MonoBehaviour:
   - {fileID: 944995598}
   - {fileID: 369965260}
   - {fileID: 1909488534}
-  totalWaves: 2
+  totalWaves: 3
   preparationTime: 3
   waveInterval: 10
   spawnInterval: 3
@@ -3070,6 +3074,7 @@ MonoBehaviour:
   synergyText: {fileID: 673456939}
   attackBonus: 0.3
   attackPenalty: 0.1
+  growthAttackSpeedBonus: 0.2
 --- !u!4 &2127614210
 Transform:
   m_ObjectHideFlags: 0

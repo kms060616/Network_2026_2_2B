@@ -30,7 +30,7 @@ public class SlimeAttack : MonoBehaviour
             return;
 
         target.TakeDamage(unit.AttackDamage);
-        cooldown = Mathf.Max(0.01f, data.attackInterval);
+        cooldown = unit.AttackInterval;
     }
 
     private bool IsValidTarget(EnemyHealth enemy, float range)
