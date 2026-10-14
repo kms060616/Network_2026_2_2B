@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 725071742128574166}
   - component: {fileID: 2767853850418342877}
   - component: {fileID: -6587976064046556573}
+  - component: {fileID: -7376664818671213193}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -138,3 +139,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6836bc369dee92a499adf5e017eb9154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossTimer
+--- !u!114 &-7376664818671213193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056124126601952092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb61c2be0d2ccf4087ab9086c55699c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySynergyEffect

@@ -16,6 +16,26 @@ public class SynergyManager : MonoBehaviour
     [SerializeField, Min(0f)]
     private float growthAttackSpeedBonus = 0.2f;
 
+    [Header("증기 연계")]
+    [SerializeField, Range(0f, 0.9f)]
+    private float steamSlowAmount = 0.2f;
+
+    [Header("지속 피해 연계")]
+    [SerializeField, Min(0f)]
+    private float electricDamagePerSecond = 5f;
+
+    [SerializeField, Min(0f)]
+    private float wildfireDamagePerSecond = 8f;
+
+    [Header("폭발 연계")]
+    [SerializeField, Range(0f, 1f)]
+    private float explosionCriticalChance = 0.2f;
+
+    [SerializeField, Min(1f)]
+    private float explosionCriticalMultiplier = 2f;
+
+
+
     // 조건을 달성한 순서를 보관합니다.
     private readonly List<SlimeElement> qualifiedOrder = new();
 
@@ -132,12 +152,57 @@ public class SynergyManager : MonoBehaviour
         synergyText.text = text;
 
         bool growthActive =
-    IsSynergyActive(SlimeElement.Water) &&
-    IsSynergyActive(SlimeElement.Grass);
+     IsSynergyActive(SlimeElement.Water) &&
+     IsSynergyActive(SlimeElement.Grass);
 
-        text += growthActive
-            ? $"\n연계: 성장 · 물/풀 공격속도 +{growthAttackSpeedBonus * 100f:0}%"
-            : "\n연계: 없음";
+        bool steamActive =
+            IsSynergyActive(SlimeElement.Water) &&
+            IsSynergyActive(SlimeElement.Fire);
+
+        bool electricActive =
+            IsSynergyActive(SlimeElement.Water) &&
+            IsSynergyActive(SlimeElement.Electric);
+
+        bool wildfireActive =
+            IsSynergyActive(SlimeElement.Fire) &&
+            IsSynergyActive(SlimeElement.Grass);
+
+        bool explosionActive =
+            IsSynergyActive(SlimeElement.Fire) &&
+            IsSynergyActive(SlimeElement.Electric);
+
+
+        if (growthActive)
+        {
+            text +=
+                $"\n연계: 성장 · 물/풀 공격속도 +{growthAttackSpeedBonus * 100f:0}%";
+        }
+        else if (steamActive)
+        {
+            text +=
+                $"\n연계: 증기 · 적 이동속도 -{steamSlowAmount * 100f:0}%";
+        }
+        else if (electricActive)
+        {
+            text +=
+                $"\n연계: 감전 · 초당 피해 {electricDamagePerSecond:0.##}";
+        }
+        else if (wildfireActive)
+        {
+            text +=
+                $"\n연계: 들불 · 초당 피해 {wildfireDamagePerSecond:0.##}";
+        }
+        else if (explosionActive)
+        {
+            text +=
+                $"\n연계: 폭발 · 불/전기 치명타 " +
+                $"{explosionCriticalChance * 100f:0}% · " +
+                $"피해 {explosionCriticalMultiplier:0.##}배";
+        }
+        else
+        {
+            text += "\n연계: 없음";
+        }
     }
 
     private static string ElementName(SlimeElement element)
@@ -183,6 +248,52 @@ public class SynergyManager : MonoBehaviour
             return 1f + growthAttackSpeedBonus;
 
         return 1f;
+    }
+
+    public float GetEnemyMoveSpeedMultiplier()
+    {
+        bool steamActive =
+            IsSynergyActive(SlimeElement.Water) &&
+            IsSynergyActive(SlimeElement.Fire);
+
+        return steamActive ? 1f - steamSlowAmount : 1f;
+    }
+
+    public float GetEnemyDamagePerSecond()
+    {
+        if (IsSynergyActive(SlimeElement.Water) &&
+            IsSynergyActive(SlimeElement.Electric))
+        {
+            return electricDamagePerSecond;
+        }
+
+        if (IsSynergyActive(SlimeElement.Fire) &&
+            IsSynergyActive(SlimeElement.Grass))
+        {
+            return wildfireDamagePerSecond;
+        }
+
+        return 0f;
+    }
+
+    public float GetCriticalChance(SlimeElement element)
+    {
+        bool explosionActive =
+            IsSynergyActive(SlimeElement.Fire) &&
+            IsSynergyActive(SlimeElement.Electric);
+
+        bool affectedUnit =
+            element == SlimeElement.Fire ||
+            element == SlimeElement.Electric;
+
+        return explosionActive && affectedUnit
+            ? explosionCriticalChance
+            : 0f;
+    }
+
+    public float GetCriticalMultiplier()
+    {
+        return explosionCriticalMultiplier;
     }
 
 }

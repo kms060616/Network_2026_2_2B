@@ -41,6 +41,7 @@ public class WaveManager : MonoBehaviour
     [Header("결과 화면")]
     [SerializeField] private ResultUI resultUI;
 
+
     public bool IsGameEnded => gameEnded;
 
     private float sessionStartTime;

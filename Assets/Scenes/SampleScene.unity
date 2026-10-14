@@ -2070,17 +2070,17 @@ MonoBehaviour:
   board: {fileID: 117094815}
   slimePrefab: {fileID: -9081012731682744145, guid: 7aa7e8c944c53db44ad6ad77038c71c2, type: 3}
   summonData:
-  - {fileID: 11400000, guid: 4c6f3336c26f2554babc654fb7a71713, type: 2}
-  - {fileID: 11400000, guid: e5ea5a142cf229b4882e110d035b6683, type: 2}
-  - {fileID: 11400000, guid: 20ef2da75d9c27943805c67603645ea2, type: 2}
-  - {fileID: 11400000, guid: 36f37e40857abc74690233483c03f74b, type: 2}
-  - {fileID: 11400000, guid: 6a339f37e4639ed42b210797818a6a57, type: 2}
-  - {fileID: 11400000, guid: 5c9a7978dae274d4481cf18f15f0036a, type: 2}
-  - {fileID: 11400000, guid: 8278226866f3e344aa3a9c03f06ac869, type: 2}
-  - {fileID: 11400000, guid: 7606edbba33acf84ca807036b467b1ca, type: 2}
+  - {fileID: 11400000, guid: 04240a435ce118d4988bdbda471238fc, type: 2}
+  - {fileID: 11400000, guid: def7f2d74dc7eac4a81388bf7a3f0c02, type: 2}
+  - {fileID: 11400000, guid: 50eda19980ab9d441978c3e8ca3a0246, type: 2}
+  - {fileID: 11400000, guid: 4b2413bedf186ca4fb26337e944f2438, type: 2}
+  - {fileID: 11400000, guid: 0d39af498e1510c4db28b47e85cdbc74, type: 2}
+  - {fileID: 11400000, guid: b67f9cd4a3a04364fb0b3b64f13c2e8c, type: 2}
+  - {fileID: 11400000, guid: 22fb27dbf40851c43a3796f0e84b7039, type: 2}
+  - {fileID: 11400000, guid: d81cc09fce3bd6d469ac2174c117e478, type: 2}
   goldText: {fileID: 1722607288}
   startingGold: 100
-  summonCost: 20
+  summonCost: 1
   waveManager: {fileID: 1595857531}
 --- !u!4 &1215344946
 Transform:
@@ -3075,6 +3075,11 @@ MonoBehaviour:
   attackBonus: 0.3
   attackPenalty: 0.1
   growthAttackSpeedBonus: 0.2
+  steamSlowAmount: 0.2
+  electricDamagePerSecond: 5
+  wildfireDamagePerSecond: 8
+  explosionCriticalChance: 0.2
+  explosionCriticalMultiplier: 2
 --- !u!4 &2127614210
 Transform:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(SlimeUnit))]
 public class SlimeAttack : MonoBehaviour
 {
+    [SerializeField] private bool logCriticalHits;
     private SlimeUnit unit;
     private EnemyHealth target;
     private float cooldown;
@@ -29,7 +30,31 @@ public class SlimeAttack : MonoBehaviour
         if (target == null || cooldown > 0f)
             return;
 
-        target.TakeDamage(unit.AttackDamage);
+        float damage = unit.AttackDamage;
+        bool critical = false;
+
+        SynergyManager manager = SynergyManager.Instance;
+
+        if (manager != null)
+        {
+            float chance = manager.GetCriticalChance(data.element);
+
+            if (chance > 0f && Random.value < chance)
+            {
+                critical = true;
+                damage *= manager.GetCriticalMultiplier();
+            }
+        }
+
+        if (critical && logCriticalHits)
+        {
+            Debug.Log(
+                $"{name} 치명타! 피해: {damage:0.##}",
+                this
+            );
+        }
+
+        target.TakeDamage(damage);
         cooldown = unit.AttackInterval;
     }
 

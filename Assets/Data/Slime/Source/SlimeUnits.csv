@@ -7,3 +7,11 @@ grass_common,일반 풀 슬라임,Grass,Common,7,0.7,2,grass_rare
 grass_rare,희귀 풀 슬라임,Grass,Rare,18,0.7,2.5,grass_hero
 grass_hero,영웅 풀 슬라임,Grass,Hero,40,0.6,2.5,grass_legendary
 grass_legendary,전설 풀 슬라임,Grass,Legendary,85,0.5,3,
+fire_common,일반 불 슬라임,Fire,Common,15,1.4,2.5,fire_rare
+fire_rare,희귀 불 슬라임,Fire,Rare,35,1.4,2.5,fire_hero
+fire_hero,영웅 불 슬라임,Fire,Hero,80,1.3,3,fire_legendary
+fire_legendary,전설 불 슬라임,Fire,Legendary,180,1.2,3,
+electric_common,일반 전기 슬라임,Electric,Common,8,0.8,3,electric_rare
+electric_rare,희귀 전기 슬라임,Electric,Rare,20,0.8,3,electric_hero
+electric_hero,영웅 전기 슬라임,Electric,Hero,45,0.7,3.5,electric_legendary
+electric_legendary,전설 전기 슬라임,Electric,Legendary,95,0.6,4,

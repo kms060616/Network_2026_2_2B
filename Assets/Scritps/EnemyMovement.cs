@@ -7,11 +7,33 @@ public class EnemyMovement : MonoBehaviour
 
     private int targetIndex;
 
+    public float CurrentMoveSpeed
+    {
+        get
+        {
+            float multiplier = SynergyManager.Instance != null
+                ? SynergyManager.Instance
+                    .GetEnemyMoveSpeedMultiplier()
+                : 1f;
+
+            return moveSpeed * multiplier;
+        }
+    }
+
+    public void SetPath(Transform[] pathPoints)
+    {
+        points = pathPoints;
+    }
+
     private void Start()
     {
         if (points == null || points.Length < 2)
         {
-            Debug.LogError("경로 지점을 2개 이상 연결해주세요.", this);
+            Debug.LogError(
+                "경로 지점을 2개 이상 연결해주세요.",
+                this
+            );
+
             enabled = false;
             return;
         }
@@ -20,13 +42,16 @@ public class EnemyMovement : MonoBehaviour
         {
             if (point == null)
             {
-                Debug.LogError("비어 있는 경로 지점이 있습니다.", this);
+                Debug.LogError(
+                    "비어 있는 경로 지점이 있습니다.",
+                    this
+                );
+
                 enabled = false;
                 return;
             }
         }
 
-        // 첫 지점에서 출발해 두 번째 지점으로 이동합니다.
         transform.position = points[0].position;
         targetIndex = 1;
     }
@@ -38,10 +63,9 @@ public class EnemyMovement : MonoBehaviour
         transform.position = Vector3.MoveTowards(
             transform.position,
             destination,
-            moveSpeed * Time.deltaTime
+            CurrentMoveSpeed * Time.deltaTime
         );
 
-        // 도착하면 다음 지점으로 이동합니다.
         if ((transform.position - destination).sqrMagnitude < 0.0001f)
         {
             transform.position = destination;
@@ -49,8 +73,15 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void SetPath(Transform[] pathPoints)
+    [ContextMenu("테스트: 현재 이동속도")]
+    private void LogCurrentMoveSpeed()
     {
-        points = pathPoints;
+        if (!Application.isPlaying)
+            return;
+
+        Debug.Log(
+            $"기본 속도: {moveSpeed}, 현재 속도: {CurrentMoveSpeed}",
+            this
+        );
     }
 }
