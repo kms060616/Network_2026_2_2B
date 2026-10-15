@@ -35,6 +35,26 @@ public class SynergyManager : MonoBehaviour
     private float explosionCriticalMultiplier = 2f;
 
 
+    [Header("광합성 연계")]
+    [SerializeField, Min(0f)]
+    private float photosynthesisBonus = 0.2f;
+
+    public float GetSkillSpeedMultiplier(SlimeElement element)
+    {
+        bool active =
+            IsSynergyActive(SlimeElement.Grass) &&
+            IsSynergyActive(SlimeElement.Electric);
+
+        bool affectedUnit =
+            element == SlimeElement.Grass ||
+            element == SlimeElement.Electric;
+
+        return active && affectedUnit
+            ? 1f + photosynthesisBonus
+            : 1f;
+    }
+
+
 
     // 조건을 달성한 순서를 보관합니다.
     private readonly List<SlimeElement> qualifiedOrder = new();
@@ -171,6 +191,10 @@ public class SynergyManager : MonoBehaviour
             IsSynergyActive(SlimeElement.Fire) &&
             IsSynergyActive(SlimeElement.Electric);
 
+        bool photosynthesisActive =
+            IsSynergyActive(SlimeElement.Grass) &&
+            IsSynergyActive(SlimeElement.Electric);
+
 
         if (growthActive)
         {
@@ -198,6 +222,12 @@ public class SynergyManager : MonoBehaviour
                 $"\n연계: 폭발 · 불/전기 치명타 " +
                 $"{explosionCriticalChance * 100f:0}% · " +
                 $"피해 {explosionCriticalMultiplier:0.##}배";
+        }
+        else if (photosynthesisActive)
+        {
+            text +=
+                $"\n연계: 광합성 · 풀/전기 마나 회복·" +
+                $"쿨타임 진행속도 +{photosynthesisBonus * 100f:0}%";
         }
         else
         {

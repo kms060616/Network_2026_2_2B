@@ -22,4 +22,7 @@ public class SlimeData : ScriptableObject
 
     [Header("합성 결과")]
     public SlimeData mergeResult;
+
+    [Header("고유 스킬")]
+    public SlimeSkillData skill;
 }
