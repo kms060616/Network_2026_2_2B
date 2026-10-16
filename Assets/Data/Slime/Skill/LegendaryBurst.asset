@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: LegendaryBurst
   m_EditorClassIdentifier: Assembly-CSharp::SlimeSkillData
   skillName: "\uB9C8\uB098 \uD3ED\uBC1C"
+  triggerType: 0
+  attacksRequired: 5
+  triggerChance: 0.2
   manaCost: 100
   manaRecovery: 10
   cooldown: 8

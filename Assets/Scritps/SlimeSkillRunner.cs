@@ -8,6 +8,7 @@ public class SlimeSkillRunner : MonoBehaviour
 
     public float CurrentMana => mana;
     public float RemainingCooldown => cooldownRemaining;
+    public int AttackCount => attackCount;
 
     private SlimeUnit unit;
     private SlimeData previousData;
@@ -15,10 +16,44 @@ public class SlimeSkillRunner : MonoBehaviour
 
     private float mana;
     private float cooldownRemaining;
+    private int attackCount;
 
     private void Awake()
     {
         unit = GetComponent<SlimeUnit>();
+    }
+
+    public void ResetState()
+    {
+        previousData = unit.Data;
+        previousSkill = unit.Data != null
+            ? unit.Data.skill
+            : null;
+
+        mana = 0f;
+        cooldownRemaining = 0f;
+        attackCount = 0;
+    }
+
+    private void SyncData()
+    {
+        SlimeData data = unit.Data;
+        SlimeSkillData skill = data != null ? data.skill : null;
+
+        if (data != previousData || skill != previousSkill)
+            ResetState();
+    }
+
+    private bool CanUseSkill()
+    {
+        SlimeData data = unit.Data;
+
+        return data != null &&
+               data.skill != null &&
+               (data.grade == SlimeGrade.Hero ||
+                data.grade == SlimeGrade.Legendary) &&
+               unit.CurrentCell != null &&
+               unit.CurrentCell.Occupant == gameObject;
     }
 
     private void Update()
@@ -26,30 +61,28 @@ public class SlimeSkillRunner : MonoBehaviour
         if (Time.timeScale == 0f)
             return;
 
-        SlimeData data = unit.Data;
-        SlimeSkillData skill = data != null ? data.skill : null;
+        SyncData();
 
-        // 합성으로 종류나 스킬이 바뀌면 자원을 초기화합니다.
-        if (data != previousData || skill != previousSkill)
-        {
-            previousData = data;
-            previousSkill = skill;
-            mana = 0f;
-            cooldownRemaining = 0f;
-        }
-
-        if (data == null || skill == null ||
-            data.grade != SlimeGrade.Legendary ||
-            unit.CurrentCell == null)
-        {
+        if (!CanUseSkill())
             return;
-        }
+
+        SlimeData data = unit.Data;
+        SlimeSkillData skill = data.skill;
 
         float speedMultiplier = SynergyManager.Instance != null
             ? SynergyManager.Instance.GetSkillSpeedMultiplier(
                 data.element
             )
             : 1f;
+
+        cooldownRemaining = Mathf.Max(
+            0f,
+            cooldownRemaining - speedMultiplier * Time.deltaTime
+        );
+
+        // 횟수·확률 방식은 기본 공격 알림에서 처리합니다.
+        if (skill.triggerType != SkillTriggerType.Mana)
+            return;
 
         float cost = Mathf.Max(1f, skill.manaCost);
 
@@ -59,59 +92,58 @@ public class SlimeSkillRunner : MonoBehaviour
                 speedMultiplier * Time.deltaTime
         );
 
-        cooldownRemaining = Mathf.Max(
-            0f,
-            cooldownRemaining - speedMultiplier * Time.deltaTime
-        );
-
         if (mana < cost || cooldownRemaining > 0f)
             return;
 
         EnemyHealth target = FindNearestEnemy(data.attackRange);
 
-        // 적이 없으면 마나를 보관합니다.
         if (target == null)
             return;
 
-        Vector3 center = target.transform.position;
-
         mana -= cost;
-        cooldownRemaining = Mathf.Max(0f, skill.cooldown);
-
-        CastSkill(skill, center);
+        Activate(skill, target.transform.position);
     }
 
-    private EnemyHealth FindNearestEnemy(float range)
+    // SlimeAttack이 실제 기본 공격을 한 직후 호출합니다.
+    public void NotifyBasicAttack(Vector3 targetPosition)
     {
-        EnemyHealth nearest = null;
-        float bestDistance = range * range;
+        if (!isActiveAndEnabled || Time.timeScale == 0f)
+            return;
 
-        EnemyHealth[] enemies = FindObjectsByType<EnemyHealth>(
-            FindObjectsSortMode.None
-        );
+        SyncData();
 
-        foreach (EnemyHealth enemy in enemies)
+        if (!CanUseSkill())
+            return;
+
+        SlimeSkillData skill = unit.Data.skill;
+
+        if (skill.triggerType == SkillTriggerType.AttackCount)
         {
-            if (enemy.IsDead || !enemy.isActiveAndEnabled)
-                continue;
+            int required = Mathf.Max(1, skill.attacksRequired);
 
-            Vector2 offset =
-                enemy.transform.position - transform.position;
+            // 쿨타임 중에도 횟수는 최대 필요 횟수까지 쌓습니다.
+            attackCount = Mathf.Min(required, attackCount + 1);
 
-            float distance = offset.sqrMagnitude;
-
-            if (distance <= bestDistance)
+            if (attackCount >= required && cooldownRemaining <= 0f)
             {
-                nearest = enemy;
-                bestDistance = distance;
+                attackCount = 0;
+                Activate(skill, targetPosition);
             }
         }
-
-        return nearest;
+        else if (skill.triggerType == SkillTriggerType.Chance)
+        {
+            if (cooldownRemaining <= 0f &&
+                Random.value < skill.triggerChance)
+            {
+                Activate(skill, targetPosition);
+            }
+        }
     }
 
-    private void CastSkill(SlimeSkillData skill, Vector3 center)
+    private void Activate(SlimeSkillData skill, Vector3 center)
     {
+        cooldownRemaining = Mathf.Max(0f, skill.cooldown);
+
         float damage = unit.AttackDamage * skill.damageMultiplier;
         float radiusSquared = skill.effectRadius * skill.effectRadius;
         int hitCount = 0;
@@ -144,13 +176,43 @@ public class SlimeSkillRunner : MonoBehaviour
         }
     }
 
-    [ContextMenu("테스트: 마나와 쿨타임")]
-    private void LogResources()
+    private EnemyHealth FindNearestEnemy(float range)
+    {
+        EnemyHealth nearest = null;
+        float bestDistance = range * range;
+
+        EnemyHealth[] enemies = FindObjectsByType<EnemyHealth>(
+            FindObjectsSortMode.None
+        );
+
+        foreach (EnemyHealth enemy in enemies)
+        {
+            if (enemy.IsDead || !enemy.isActiveAndEnabled)
+                continue;
+
+            Vector2 offset =
+                enemy.transform.position - transform.position;
+
+            float distance = offset.sqrMagnitude;
+
+            if (distance <= bestDistance)
+            {
+                nearest = enemy;
+                bestDistance = distance;
+            }
+        }
+
+        return nearest;
+    }
+
+    [ContextMenu("테스트: 스킬 상태")]
+    private void LogState()
     {
         if (!Application.isPlaying)
             return;
 
         Debug.Log(
+            $"공격 횟수: {attackCount}, " +
             $"마나: {mana:0.##}, " +
             $"남은 쿨타임: {cooldownRemaining:0.##}초",
             this

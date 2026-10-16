@@ -9,10 +9,12 @@ public class SlimeAttack : MonoBehaviour
     private SlimeUnit unit;
     private EnemyHealth target;
     private float cooldown;
+    private SlimeSkillRunner skillRunner;
 
     private void Awake()
     {
         unit = GetComponent<SlimeUnit>();
+        skillRunner = GetComponent<SlimeSkillRunner>();
     }
 
     private void Update()
@@ -53,9 +55,14 @@ public class SlimeAttack : MonoBehaviour
                 this
             );
         }
+        Vector3 hitPosition = target.transform.position;
 
         target.TakeDamage(damage);
         cooldown = unit.AttackInterval;
+
+        if (skillRunner != null)
+            skillRunner.NotifyBasicAttack(hitPosition);
+
     }
 
     private bool IsValidTarget(EnemyHealth enemy, float range)

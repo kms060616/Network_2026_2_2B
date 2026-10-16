@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1931677440637061937}
   - component: {fileID: 1844263457958802879}
   - component: {fileID: -9081012731682744145}
+  - component: {fileID: 8041402638218432192}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -105,9 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456946193690adc45aeb90b5f8cfd618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeAttack
-  attackRange: 3
-  attackDamage: 10
-  attackInterval: 1
+  logCriticalHits: 0
 --- !u!114 &-9081012731682744145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,3 +119,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5484981a7bd8241b3482323c1182de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeUnit
+  data: {fileID: 0}
+--- !u!114 &8041402638218432192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591275509803541800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c13d7f61b5b104c8e23d868ad49314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeSkillRunner
+  logSkillUse: 0

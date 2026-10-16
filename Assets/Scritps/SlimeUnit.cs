@@ -24,6 +24,8 @@ public class SlimeUnit : MonoBehaviour
         }
 
         ApplyAppearance();
+        if (TryGetComponent(out SlimeSkillRunner runner))
+            runner.ResetState();
     }
 
     private void ApplyAppearance()
