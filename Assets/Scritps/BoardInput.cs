@@ -11,6 +11,8 @@ public class BoardInput : MonoBehaviour
     private SlimeUnit selectedUnit;
     private BoardCell selectedCell;
 
+    public SlimeUnit SelectedUnit => selectedUnit;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
