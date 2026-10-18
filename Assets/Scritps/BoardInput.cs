@@ -7,6 +7,7 @@ public class BoardInput : MonoBehaviour
 
     [SerializeField] private bool mergeMode = true;
     [SerializeField] private TMP_Text modeText;
+    [SerializeField] private SlimeSummoner summoner;
 
     private SlimeUnit selectedUnit;
     private BoardCell selectedCell;
@@ -116,7 +117,7 @@ public class BoardInput : MonoBehaviour
         selectedCell.SetSelected(true);
     }
 
-    private void ClearSelection()
+    public void ClearSelection()
     {
         if (selectedCell != null)
             selectedCell.SetSelected(false);
@@ -134,5 +135,22 @@ public class BoardInput : MonoBehaviour
     {
         if (Instance == this)
             Instance = null;
+    }
+
+    public bool TrySwipeSell(SlimeUnit unit)
+    {
+        if (!isActiveAndEnabled ||
+            summoner == null ||
+            unit == null ||
+            selectedUnit != unit)
+        {
+            return false;
+        }
+
+        if (!summoner.TrySell(unit))
+            return false;
+
+        ClearSelection();
+        return true;
     }
 }

@@ -208,4 +208,23 @@ public class SlimeUnit : MonoBehaviour
             );
         }
     }
+
+    public bool TryRemoveFromBoard()
+    {
+        if (CurrentCell == null ||
+            CurrentCell.Occupant != gameObject)
+        {
+            return false;
+        }
+
+        CurrentCell.ClearUnit();
+        CurrentCell.SetSelected(false);
+        CurrentCell = null;
+
+        // 공격과 스킬을 즉시 중지합니다.
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+
+        return true;
+    }
 }

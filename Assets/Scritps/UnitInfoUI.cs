@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitInfoUI : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class UnitInfoUI : MonoBehaviour
     [SerializeField] private TMP_Text unitNameText;
     [SerializeField] private TMP_Text unitStatsText;
     [SerializeField] private TMP_Text unitSkillText;
+
+    [SerializeField] private SlimeSummoner summoner;
+    [SerializeField] private Button sellButton;
+    [SerializeField] private TMP_Text sellButtonText;
 
     private void Awake()
     {
@@ -43,6 +48,21 @@ public class UnitInfoUI : MonoBehaviour
     private void Refresh(SlimeUnit unit)
     {
         SlimeData data = unit.Data;
+
+        if (sellButton != null)
+        {
+            sellButton.interactable =
+                summoner != null &&
+                boardInput != null &&
+                boardInput.isActiveAndEnabled;
+        }
+
+        if (sellButtonText != null)
+        {
+            sellButtonText.text = summoner != null
+                ? $"판매 {summoner.GetSellPrice(unit)}G"
+                : "판매";
+        }
 
         if (unitNameText != null)
         {
@@ -129,5 +149,26 @@ public class UnitInfoUI : MonoBehaviour
             SlimeGrade.Legendary => "전설",
             _ => grade.ToString()
         };
+    }
+
+    public void SellSelected()
+    {
+        if (summoner == null ||
+            boardInput == null ||
+            !boardInput.isActiveAndEnabled)
+        {
+            return;
+        }
+
+        SlimeUnit selected = boardInput.SelectedUnit;
+
+        if (selected == null)
+            return;
+
+        if (summoner.TrySell(selected))
+        {
+            boardInput.ClearSelection();
+            SetVisible(false);
+        }
     }
 }

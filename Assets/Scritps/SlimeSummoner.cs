@@ -124,4 +124,44 @@ public class SlimeSummoner : MonoBehaviour
         gold -= summonCost;
         UpdateGoldText();
     }
+
+    public int GetSellPrice(SlimeUnit unit)
+    {
+        if (unit == null || unit.Data == null)
+            return 0;
+
+        int multiplier = unit.Data.grade switch
+        {
+            SlimeGrade.Common => 1,
+            SlimeGrade.Rare => 2,
+            SlimeGrade.Hero => 4,
+            SlimeGrade.Legendary => 8,
+            _ => 0
+        };
+
+        return Mathf.FloorToInt(summonCost * 0.5f * multiplier);
+    }
+
+    public bool TrySell(SlimeUnit unit)
+    {
+        if (waveManager != null && waveManager.IsGameEnded)
+            return false;
+
+        if (board == null ||
+            unit == null ||
+            unit.Data == null ||
+            !unit.isActiveAndEnabled ||
+            !unit.transform.IsChildOf(board))
+        {
+            return false;
+        }
+
+        int price = GetSellPrice(unit);
+
+        if (!unit.TryRemoveFromBoard())
+            return false;
+
+        AddGold(price);
+        return true;
+    }
 }
