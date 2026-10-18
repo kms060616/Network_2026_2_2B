@@ -16,6 +16,7 @@ public class SlimeUnit : MonoBehaviour
     public void Initialize(SlimeData newData)
     {
         data = newData;
+        UpgradeLevel = 0;
 
         if (data == null)
         {
@@ -181,11 +182,17 @@ public class SlimeUnit : MonoBehaviour
             if (data == null)
                 return 0f;
 
-            float multiplier = SynergyManager.Instance != null
-                ? SynergyManager.Instance.GetAttackMultiplier(data.element)
+            float upgradeMultiplier = 1f + UpgradeLevel * 0.2f;
+
+            float synergyMultiplier = SynergyManager.Instance != null
+                ? SynergyManager.Instance.GetAttackMultiplier(
+                    data.element
+                )
                 : 1f;
 
-            return data.attackDamage * multiplier;
+            return data.attackDamage *
+                upgradeMultiplier *
+                synergyMultiplier;
         }
     }
 
@@ -225,6 +232,28 @@ public class SlimeUnit : MonoBehaviour
         gameObject.SetActive(false);
         Destroy(gameObject);
 
+        return true;
+    }
+
+    public const int MaxUpgradeLevel = 10;
+
+    public int UpgradeLevel { get; private set; }
+
+    public bool CanUpgrade =>
+        data != null &&
+        data.grade == SlimeGrade.Legendary &&
+        UpgradeLevel < MaxUpgradeLevel;
+
+    public int UpgradeCost => CanUpgrade
+        ? 50 * (1 << UpgradeLevel)
+        : 0;
+
+    public bool TryUpgrade()
+    {
+        if (!CanUpgrade)
+            return false;
+
+        UpgradeLevel++;
         return true;
     }
 }

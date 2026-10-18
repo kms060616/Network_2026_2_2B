@@ -15,6 +15,9 @@ public class UnitInfoUI : MonoBehaviour
     [SerializeField] private Button sellButton;
     [SerializeField] private TMP_Text sellButtonText;
 
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private TMP_Text upgradeButtonText;
+
     private void Awake()
     {
         SetVisible(false);
@@ -48,6 +51,7 @@ public class UnitInfoUI : MonoBehaviour
     private void Refresh(SlimeUnit unit)
     {
         SlimeData data = unit.Data;
+        RefreshUpgradeButton(unit);
 
         if (sellButton != null)
         {
@@ -66,8 +70,12 @@ public class UnitInfoUI : MonoBehaviour
 
         if (unitNameText != null)
         {
+            string upgradeLabel = data.grade == SlimeGrade.Legendary
+                ? $" +{unit.UpgradeLevel}"
+                : "";
+
             unitNameText.text =
-                $"{data.unitName}\n" +
+                $"{data.unitName}{upgradeLabel}\n" +
                 $"{ElementName(data.element)} / {GradeName(data.grade)}";
         }
 
@@ -170,5 +178,46 @@ public class UnitInfoUI : MonoBehaviour
             boardInput.ClearSelection();
             SetVisible(false);
         }
+    }
+
+    private void RefreshUpgradeButton(SlimeUnit unit)
+    {
+        bool legendary =
+            unit.Data.grade == SlimeGrade.Legendary;
+
+        if (upgradeButton != null)
+        {
+            upgradeButton.gameObject.SetActive(legendary);
+
+            upgradeButton.interactable =
+                legendary &&
+                unit.CanUpgrade &&
+                summoner != null &&
+                summoner.CurrentGold >= unit.UpgradeCost &&
+                boardInput != null &&
+                boardInput.isActiveAndEnabled;
+        }
+
+        if (upgradeButtonText != null && legendary)
+        {
+            upgradeButtonText.text = unit.CanUpgrade
+                ? $"강화 +{unit.UpgradeLevel + 1} · {unit.UpgradeCost}G"
+                : $"최대 강화 +{unit.UpgradeLevel}";
+        }
+    }
+
+    public void UpgradeSelected()
+    {
+        if (summoner == null ||
+            boardInput == null ||
+            !boardInput.isActiveAndEnabled)
+        {
+            return;
+        }
+
+        SlimeUnit selected = boardInput.SelectedUnit;
+
+        if (selected != null && summoner.TryUpgrade(selected))
+            Refresh(selected);
     }
 }

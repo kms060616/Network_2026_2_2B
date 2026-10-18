@@ -164,4 +164,39 @@ public class SlimeSummoner : MonoBehaviour
         AddGold(price);
         return true;
     }
+
+    public int CurrentGold => gold;
+
+    public bool TryUpgrade(SlimeUnit unit)
+    {
+        if (waveManager != null && waveManager.IsGameEnded)
+            return false;
+
+        if (board == null ||
+            unit == null ||
+            !unit.isActiveAndEnabled ||
+            !unit.transform.IsChildOf(board) ||
+            unit.CurrentCell == null ||
+            unit.CurrentCell.Occupant != unit.gameObject ||
+            !unit.CanUpgrade)
+        {
+            return false;
+        }
+
+        int cost = unit.UpgradeCost;
+
+        if (gold < cost)
+        {
+            Debug.Log("강화할 골드가 부족합니다.", this);
+            return false;
+        }
+
+        if (!unit.TryUpgrade())
+            return false;
+
+        gold -= cost;
+        UpdateGoldText();
+
+        return true;
+    }
 }
