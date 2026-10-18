@@ -199,4 +199,15 @@ public class SlimeSummoner : MonoBehaviour
 
         return true;
     }
+
+    public void GrantGold(int amount)
+    {
+        if (amount <= 0)
+            return;
+
+        if (waveManager != null && waveManager.IsGameEnded)
+            return;
+
+        AddGold(amount);
+    }
 }

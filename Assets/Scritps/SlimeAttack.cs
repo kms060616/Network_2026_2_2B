@@ -19,6 +19,8 @@ public class SlimeAttack : MonoBehaviour
 
     private void Update()
     {
+        if (unit.IsDispatched)
+            return;
         SlimeData data = unit.Data;
 
         if (data == null)

@@ -12,7 +12,8 @@ public class BoardCell : MonoBehaviour, IPointerClickHandler,
     IEndDragHandler
 {
     public GameObject Occupant { get; private set; }
-    public bool IsEmpty => Occupant == null;
+    public bool IsEmpty => Occupant == null && !IsLocked;
+
 
     [SerializeField]
     private Color selectedColor =
@@ -55,6 +56,12 @@ public class BoardCell : MonoBehaviour, IPointerClickHandler,
 
     public void SetSelected(bool selected)
     {
+        if (IsLocked)
+        {
+            cellRenderer.color = originalColor * 0.5f;
+            return;
+        }
+
         cellRenderer.color = selected
             ? selectedColor
             : originalColor;
@@ -140,5 +147,13 @@ public class BoardCell : MonoBehaviour, IPointerClickHandler,
 
         if (input != null)
             input.TrySwipeSell(unit);
+    }
+
+    public bool IsLocked { get; private set; }
+
+    public void SetLocked(bool locked)
+    {
+        IsLocked = locked;
+        SetSelected(false);
     }
 }

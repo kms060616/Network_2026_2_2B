@@ -58,6 +58,8 @@ public class SlimeSkillRunner : MonoBehaviour
 
     private void Update()
     {
+        if (unit.IsDispatched)
+            return;
         if (Time.timeScale == 0f)
             return;
 
@@ -107,6 +109,8 @@ public class SlimeSkillRunner : MonoBehaviour
     // SlimeAttack이 실제 기본 공격을 한 직후 호출합니다.
     public void NotifyBasicAttack(Vector3 targetPosition)
     {
+        if (unit.IsDispatched)
+            return;
         if (!isActiveAndEnabled || Time.timeScale == 0f)
             return;
 

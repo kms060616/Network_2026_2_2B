@@ -52,6 +52,8 @@ public class BoardInput : MonoBehaviour
 
     public void HandleCellClick(BoardCell clickedCell)
     {
+        if (clickedCell == null || clickedCell.IsLocked)
+            return;
         if (!isActiveAndEnabled)
             return;
         if (clickedCell == null)

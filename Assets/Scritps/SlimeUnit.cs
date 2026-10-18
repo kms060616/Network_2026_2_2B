@@ -58,6 +58,8 @@ public class SlimeUnit : MonoBehaviour
     public bool CanMergeWith(SlimeUnit other)
     {
         return other != null &&
+            !IsDispatched &&
+            !other.IsDispatched &&
                other != this &&
                data != null &&
                other.data != null &&
@@ -65,10 +67,17 @@ public class SlimeUnit : MonoBehaviour
                data.grade == other.data.grade &&
                data.grade != SlimeGrade.Legendary &&
                data.mergeResult != null;
+
     }
 
     public bool TryMoveTo(BoardCell destination)
     {
+        if (IsDispatched ||
+    destination == null ||
+    destination.IsLocked)
+        {
+            return false;
+        }
         if (destination == null)
             return false;
 
@@ -91,6 +100,12 @@ public class SlimeUnit : MonoBehaviour
 
     public bool TrySwapWith(SlimeUnit other)
     {
+        if (IsDispatched ||
+    other == null ||
+    other.IsDispatched)
+        {
+            return false;
+        }
         if (other == null || other == this)
             return false;
 
@@ -218,6 +233,8 @@ public class SlimeUnit : MonoBehaviour
 
     public bool TryRemoveFromBoard()
     {
+        if (IsDispatched)
+            return false;
         if (CurrentCell == null ||
             CurrentCell.Occupant != gameObject)
         {
@@ -240,9 +257,10 @@ public class SlimeUnit : MonoBehaviour
     public int UpgradeLevel { get; private set; }
 
     public bool CanUpgrade =>
-        data != null &&
-        data.grade == SlimeGrade.Legendary &&
-        UpgradeLevel < MaxUpgradeLevel;
+    !IsDispatched &&
+    data != null &&
+    data.grade == SlimeGrade.Legendary &&
+    UpgradeLevel < MaxUpgradeLevel;
 
     public int UpgradeCost => CanUpgrade
         ? 50 * (1 << UpgradeLevel)
@@ -254,6 +272,57 @@ public class SlimeUnit : MonoBehaviour
             return false;
 
         UpgradeLevel++;
+        return true;
+    }
+
+    public bool IsDispatched { get; private set; }
+
+    private SpriteRenderer dispatchRenderer;
+    private bool rendererWasEnabled;
+
+    public bool TryDispatch()
+    {
+        if (IsDispatched ||
+            !isActiveAndEnabled ||
+            CurrentCell == null ||
+            CurrentCell.Occupant != gameObject ||
+            CurrentCell.IsLocked)
+        {
+            return false;
+        }
+
+        IsDispatched = true;
+        CurrentCell.SetLocked(true);
+
+        // 오브젝트는 유지하고 외형만 숨깁니다.
+        // 시너지 집계와 원래 칸 정보는 그대로 유지됩니다.
+        dispatchRenderer = GetComponent<SpriteRenderer>();
+
+        if (dispatchRenderer != null)
+        {
+            rendererWasEnabled = dispatchRenderer.enabled;
+            dispatchRenderer.enabled = false;
+        }
+
+        return true;
+    }
+
+    public bool TryReturnFromDispatch()
+    {
+        if (!IsDispatched ||
+            CurrentCell == null ||
+            CurrentCell.Occupant != gameObject)
+        {
+            return false;
+        }
+
+        IsDispatched = false;
+        CurrentCell.SetLocked(false);
+        transform.position = CurrentCell.transform.position;
+
+        if (dispatchRenderer != null)
+            dispatchRenderer.enabled = rendererWasEnabled;
+
         return true;
     }
 }
