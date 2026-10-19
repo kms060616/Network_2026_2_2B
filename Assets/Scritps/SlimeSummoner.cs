@@ -45,6 +45,8 @@ public class SlimeSummoner : MonoBehaviour
 
     public void Summon()
     {
+        if (PauseManager.IsPaused)
+            return;
         if (waveManager != null && waveManager.IsGameEnded)
             return;
         if (board == null || slimePrefab == null)
@@ -144,6 +146,8 @@ public class SlimeSummoner : MonoBehaviour
 
     public bool TrySell(SlimeUnit unit)
     {
+        if (PauseManager.IsPaused)
+            return false;
         if (waveManager != null && waveManager.IsGameEnded)
             return false;
 
@@ -169,6 +173,8 @@ public class SlimeSummoner : MonoBehaviour
 
     public bool TryUpgrade(SlimeUnit unit)
     {
+        if (PauseManager.IsPaused)
+            return false;
         if (waveManager != null && waveManager.IsGameEnded)
             return false;
 

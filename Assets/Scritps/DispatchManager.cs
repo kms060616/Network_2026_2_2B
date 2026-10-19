@@ -43,6 +43,8 @@ public class DispatchManager : MonoBehaviour
 
     private bool CanOperate()
     {
+        if (PauseManager.IsPaused)
+            return false;
         return boardInput != null &&
                boardInput.isActiveAndEnabled &&
                waveManager != null &&

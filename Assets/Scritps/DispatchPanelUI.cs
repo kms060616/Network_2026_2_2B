@@ -27,6 +27,8 @@ public class DispatchPanelUI : MonoBehaviour
 
     public void Open()
     {
+        if (PauseManager.IsPaused)
+            return;
         if (dispatchManager == null ||
             waveManager == null ||
             waveManager.IsGameEnded ||
