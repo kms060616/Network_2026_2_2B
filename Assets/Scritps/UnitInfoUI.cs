@@ -18,6 +18,12 @@ public class UnitInfoUI : MonoBehaviour
     [SerializeField] private Button upgradeButton;
     [SerializeField] private TMP_Text upgradeButtonText;
 
+    [SerializeField] private Button infoToggleButton;
+    [SerializeField] private TMP_Text infoToggleText;
+
+    private bool detailsOpen;
+    private SlimeUnit observedUnit;
+
     private void Awake()
     {
         SetVisible(false);
@@ -25,21 +31,23 @@ public class UnitInfoUI : MonoBehaviour
 
     private void LateUpdate()
     {
-        SlimeUnit selected = null;
+        SlimeUnit selected = UpdateSelection();
 
-        if (boardInput != null && boardInput.isActiveAndEnabled)
-            selected = boardInput.SelectedUnit;
+        if (infoToggleButton != null)
+            infoToggleButton.interactable = selected != null;
 
-        if (selected == null ||
-            !selected.isActiveAndEnabled ||
-            selected.Data == null)
+        if (infoToggleText != null)
         {
-            SetVisible(false);
-            return;
+            infoToggleText.text = detailsOpen
+                ? "정보 닫기"
+                : "정보 보기";
         }
 
-        SetVisible(true);
-        Refresh(selected);
+        bool visible = selected != null && detailsOpen;
+        SetVisible(visible);
+
+        if (visible)
+            Refresh(selected);
     }
 
     private void SetVisible(bool visible)
@@ -218,6 +226,43 @@ public class UnitInfoUI : MonoBehaviour
         SlimeUnit selected = boardInput.SelectedUnit;
 
         if (selected != null && summoner.TryUpgrade(selected))
+            Refresh(selected);
+    }
+
+    private SlimeUnit UpdateSelection()
+    {
+        SlimeUnit selected = null;
+
+        if (boardInput != null && boardInput.isActiveAndEnabled)
+            selected = boardInput.SelectedUnit;
+
+        if (selected != null &&
+            (!selected.isActiveAndEnabled || selected.Data == null))
+        {
+            selected = null;
+        }
+
+        // 선택이 바뀌거나 해제되면 정보창을 닫습니다.
+        if (observedUnit != selected)
+        {
+            observedUnit = selected;
+            detailsOpen = false;
+        }
+
+        return selected;
+    }
+
+    public void ToggleDetails()
+    {
+        SlimeUnit selected = UpdateSelection();
+
+        if (selected == null)
+            return;
+
+        detailsOpen = !detailsOpen;
+        SetVisible(detailsOpen);
+
+        if (detailsOpen)
             Refresh(selected);
     }
 }
