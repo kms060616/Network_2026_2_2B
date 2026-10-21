@@ -14,11 +14,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField, Min(0f)] private float preparationTime = 10f;
     [SerializeField, Min(0.1f)] private float waveInterval = 25f;
     [SerializeField, Min(0.1f)] private float spawnInterval = 1f;
-    [SerializeField, Min(1)] private int enemiesPerWave = 10;
 
     [Header("적 능력치")]
-    [SerializeField, Min(1f)] private float firstWaveHealth = 30f;
-    [SerializeField, Min(0f)] private float healthGrowthPerWave = 10f;
+  
     [SerializeField, Min(0)] private int goldReward = 10;
 
     [Header("패배 조건")]
@@ -42,6 +40,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private ResultUI resultUI;
 
     [SerializeField] private WaveManager waveManager;
+    [Header("일반 적 웨이브 데이터")]
+    [SerializeField] private WaveTable waveTable;
 
 
     public bool IsGameEnded => gameEnded;
@@ -108,6 +108,58 @@ public class WaveManager : MonoBehaviour
                 this
             );
             return false;
+        }
+        if (waveTable == null)
+        {
+            Debug.LogError("WaveTable을 연결해주세요.", this);
+            return false;
+        }
+
+        if (enemyPrefab.GetComponent<SpriteRenderer>() == null)
+        {
+            Debug.LogError(
+                "Enemy 프리팹의 루트에 SpriteRenderer가 필요합니다.",
+                this
+            );
+            return false;
+        }
+
+        for (int number = 1; number <= Mathf.Max(1, totalWaves); number++)
+        {
+            WaveRow row = waveTable.GetWave(number);
+
+            if (row == null)
+            {
+                Debug.LogError(
+                    $"{number}웨이브 데이터가 없습니다.",
+                    this
+                );
+                return false;
+            }
+
+            if (row.health <= 0f ||
+                float.IsNaN(row.health) ||
+                float.IsInfinity(row.health) ||
+                row.goldMultiplier < 0f ||
+                float.IsNaN(row.goldMultiplier) ||
+                float.IsInfinity(row.goldMultiplier))
+            {
+                Debug.LogError(
+                    $"{number}웨이브 배율을 확인해주세요.",
+                    this
+                );
+                return false;
+            }
+
+            if (waveTable.GetAppearance(row.appearanceId) == null)
+            {
+                Debug.LogError(
+                    $"{number}웨이브 외형을 찾을 수 없습니다: " +
+                    row.appearanceId,
+                    this
+                );
+                return false;
+            }
         }
 
         return true;
@@ -192,13 +244,12 @@ public class WaveManager : MonoBehaviour
                     yield break;
             }
 
-            float health = firstWaveHealth +
-                (wave - 1) * healthGrowthPerWave;
+            WaveRow row = waveTable.GetWave(wave);
 
-            int count = Mathf.Max(1, enemiesPerWave);
+            const int count = 10;
             pendingSpawns += count;
 
-            StartCoroutine(SpawnWave(health, count));
+            StartCoroutine(SpawnWave(row, count));
 
             if (gameEnded)
                 yield break;
@@ -284,8 +335,17 @@ public class WaveManager : MonoBehaviour
         bossText.text = text;
     }
 
-    private IEnumerator SpawnWave(float health, int count)
+    private IEnumerator SpawnWave(WaveRow row, int count)
     {
+        WaveAppearance appearance =
+            waveTable.GetAppearance(row.appearanceId);
+
+        float health = Mathf.Max(1f, row.health);
+
+        int reward = Mathf.FloorToInt(
+            goldReward * row.goldMultiplier
+        );
+
         for (int i = 0; i < count; i++)
         {
             EnemyMovement enemy = Instantiate(
@@ -294,12 +354,23 @@ public class WaveManager : MonoBehaviour
                 Quaternion.identity
             );
 
+            enemy.name = $"Enemy_Wave{row.wave}_{i + 1}";
             enemy.SetPath(points);
+
+            SpriteRenderer renderer =
+                enemy.GetComponent<SpriteRenderer>();
+
+            // 비어 있으면 Enemy 프리팹의 기존 Sprite를 사용합니다.
+            if (appearance.sprite != null)
+                renderer.sprite = appearance.sprite;
+
+            renderer.color = appearance.color;
 
             EnemyHealth enemyHealth =
                 enemy.GetComponent<EnemyHealth>();
 
-            enemyHealth.Configure(health, goldReward);
+            enemyHealth.Configure(health, reward);
+
             pendingSpawns--;
 
             if (EnemyHealth.AliveCount > enemyLimit)

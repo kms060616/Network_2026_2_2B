@@ -6159,13 +6159,10 @@ MonoBehaviour:
   - {fileID: 944995598}
   - {fileID: 369965260}
   - {fileID: 1909488534}
-  totalWaves: 3
+  totalWaves: 5
   preparationTime: 3
   waveInterval: 10
-  spawnInterval: 3
-  enemiesPerWave: 10
-  firstWaveHealth: 30
-  healthGrowthPerWave: 10
+  spawnInterval: 1
   goldReward: 10
   enemyLimit: 70
   waveText: {fileID: 1489268866}
@@ -6179,7 +6176,8 @@ MonoBehaviour:
   bossGoldReward: 100
   bossText: {fileID: 148217804}
   resultUI: {fileID: 2024327229}
-  waveManager: {fileID: 0}
+  waveManager: {fileID: 1595857531}
+  waveTable: {fileID: 11400000, guid: ea001c9b92bdf3a45a8c91428d25e378, type: 2}
 --- !u!4 &1595857532
 Transform:
   m_ObjectHideFlags: 0

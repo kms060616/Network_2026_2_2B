@@ -228,7 +228,7 @@ public static class SlimeDataCsvImporter
     }
 
     // Supports quoted commas, escaped quotes and newlines inside quoted fields.
-    private static List<List<string>> ParseCsv(string csv)
+    public static List<List<string>> ParseCsv(string csv)
     {
         var records = new List<List<string>>();
         var record = new List<string>();
