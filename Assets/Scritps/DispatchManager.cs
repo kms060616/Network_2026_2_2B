@@ -207,18 +207,13 @@ public class DispatchManager : MonoBehaviour
             return;
 
         string text = bossActive
-            ? $"미니보스 체력: {bossHealth:0.#}/{bossMaxHealth:0.#}"
-            : $"재등장: {Mathf.CeilToInt(respawnRemaining)}초";
+    ? $"미니보스 체력: <color=#FF4040>{bossHealth:0.#}/{bossMaxHealth:0.#}</color>"
+    : $"재등장: {Mathf.CeilToInt(respawnRemaining)}초";
 
         text += $"\n처치 보상: {rewardGold}G";
         text += $"\n누적 처치: {defeatedCount}";
-        text += $"\n파견 중: {dispatchedUnits.Count}마리";
 
-        foreach (SlimeUnit unit in dispatchedUnits)
-        {
-            if (unit != null && unit.Data != null)
-                text += $"\n{unit.Data.unitName}";
-        }
+        
 
         dispatchText.text = text;
     }
