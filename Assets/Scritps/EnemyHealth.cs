@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField, Min(1f)] private float maxHealth = 30f;
     [SerializeField, Min(0)] private int goldReward = 10;
+    public float MaxHealth => maxHealth;
 
     public float CurrentHealth { get; private set; }
     public bool IsDead { get; private set; }
