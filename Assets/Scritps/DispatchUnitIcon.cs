@@ -19,10 +19,9 @@ public class DispatchUnitIcon : MonoBehaviour
             Sprite sprite = data.sprite;
 
             // 데이터에 이미지가 없으면 기존 유닛의 Sprite 사용
-            if (sprite == null &&
-                unit.TryGetComponent(out SpriteRenderer renderer))
+            if (sprite == null && unit.VisualRenderer != null)
             {
-                sprite = renderer.sprite;
+                sprite = unit.VisualRenderer.sprite;
             }
 
             portrait.sprite = sprite;

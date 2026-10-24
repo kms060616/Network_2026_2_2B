@@ -5,22 +5,43 @@ using UnityEngine;
 [RequireComponent(typeof(SlimeUnit))]
 public class SlimeAttack : MonoBehaviour
 {
+    [SerializeField] private SlimeProjectile projectilePrefab;
     [SerializeField] private bool logCriticalHits;
+
     private SlimeUnit unit;
+    private SlimeSkillRunner skillRunner;
+    private SlimeIdleAnimation visualAnimation;
+
     private EnemyHealth target;
     private float cooldown;
-    private SlimeSkillRunner skillRunner;
 
     private void Awake()
     {
         unit = GetComponent<SlimeUnit>();
         skillRunner = GetComponent<SlimeSkillRunner>();
+
+        visualAnimation =
+            GetComponentInChildren<SlimeIdleAnimation>(true);
+    }
+
+    private void Start()
+    {
+        if (projectilePrefab == null)
+        {
+            Debug.LogError(
+                "SlimeAttack에 투사체 프리팹을 연결해주세요.",
+                this
+            );
+
+            enabled = false;
+        }
     }
 
     private void Update()
     {
-        if (unit.IsDispatched)
+        if (unit.IsDispatched || Time.timeScale == 0f)
             return;
+
         SlimeData data = unit.Data;
 
         if (data == null)
@@ -50,26 +71,42 @@ public class SlimeAttack : MonoBehaviour
             }
         }
 
+        Vector3 targetPosition = target.transform.position;
+
+        SlimeProjectile projectile = Instantiate(
+            projectilePrefab,
+            transform.position,
+            Quaternion.identity
+        );
+
+        projectile.Initialize(
+            target,
+            damage,
+            GetProjectileColor(data.element)
+        );
+
+        cooldown = unit.AttackInterval;
+
+        if (visualAnimation != null)
+            visualAnimation.PlayAttack(unit.AttackInterval);
+
         if (critical && logCriticalHits)
         {
             Debug.Log(
-                $"{name} 치명타! 피해: {damage:0.##}",
+                $"{name} 치명타 발사! 예정 피해: {damage:0.##}",
                 this
             );
         }
-        Vector3 hitPosition = target.transform.position;
 
-        target.TakeDamage(damage);
-        cooldown = unit.AttackInterval;
-
+        // 공격 횟수·확률 스킬은 발사 시점을 기준으로 판정합니다.
         if (skillRunner != null)
-            skillRunner.NotifyBasicAttack(hitPosition);
-
+            skillRunner.NotifyBasicAttack(targetPosition);
     }
 
     private bool IsValidTarget(EnemyHealth enemy, float range)
     {
-        if (enemy == null || enemy.IsDead ||
+        if (enemy == null ||
+            enemy.IsDead ||
             !enemy.isActiveAndEnabled)
         {
             return false;
@@ -83,12 +120,12 @@ public class SlimeAttack : MonoBehaviour
 
     private EnemyHealth FindNearestEnemy(float range)
     {
+        EnemyHealth nearest = null;
+        float nearestDistanceSquared = range * range;
+
         EnemyHealth[] enemies = FindObjectsByType<EnemyHealth>(
             FindObjectsSortMode.None
         );
-
-        EnemyHealth nearest = null;
-        float nearestDistanceSquared = range * range;
 
         foreach (EnemyHealth enemy in enemies)
         {
@@ -111,17 +148,15 @@ public class SlimeAttack : MonoBehaviour
         return nearest;
     }
 
-    private void OnDrawGizmosSelected()
+    private static Color GetProjectileColor(SlimeElement element)
     {
-        SlimeUnit slime = GetComponent<SlimeUnit>();
-
-        if (slime == null || slime.Data == null)
-            return;
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(
-            transform.position,
-            slime.Data.attackRange
-        );
+        return element switch
+        {
+            SlimeElement.Water => new Color(0.3f, 0.7f, 1f),
+            SlimeElement.Fire => new Color(1f, 0.45f, 0.15f),
+            SlimeElement.Grass => new Color(0.3f, 1f, 0.4f),
+            SlimeElement.Electric => new Color(1f, 0.9f, 0.2f),
+            _ => Color.white
+        };
     }
 }

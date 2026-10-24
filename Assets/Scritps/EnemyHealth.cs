@@ -13,9 +13,11 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField, Min(1f)] private float maxHealth = 30f;
     [SerializeField, Min(0)] private int goldReward = 10;
     public float MaxHealth => maxHealth;
+    public event Action<float> Damaged;
 
     public float CurrentHealth { get; private set; }
     public bool IsDead { get; private set; }
+
 
     // Play를 새로 시작할 때 이전 실행의 정보를 초기화합니다.
     [RuntimeInitializeOnLoadMethod(
@@ -59,7 +61,12 @@ public class EnemyHealth : MonoBehaviour
         if (IsDead || damage <= 0f)
             return;
 
+        float appliedDamage = Mathf.Min(CurrentHealth, damage);
+
         CurrentHealth = Mathf.Max(0f, CurrentHealth - damage);
+
+        if (appliedDamage > 0f)
+            Damaged?.Invoke(appliedDamage);
 
         if (CurrentHealth <= 0f)
         {

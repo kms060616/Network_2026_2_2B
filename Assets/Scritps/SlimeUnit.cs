@@ -7,6 +7,8 @@ public class SlimeUnit : MonoBehaviour
     public SlimeData Data => data;
     public BoardCell CurrentCell { get; private set; }
 
+    [SerializeField] private SpriteRenderer visualRenderer;
+
     private void Awake()
     {
         if (data != null)
@@ -33,7 +35,7 @@ public class SlimeUnit : MonoBehaviour
     {
         gameObject.name = $"Slime_{data.element}_{data.grade}";
 
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        SpriteRenderer renderer = VisualRenderer;
 
         if (renderer != null)
         {
@@ -296,7 +298,7 @@ public class SlimeUnit : MonoBehaviour
 
         // 오브젝트는 유지하고 외형만 숨깁니다.
         // 시너지 집계와 원래 칸 정보는 그대로 유지됩니다.
-        dispatchRenderer = GetComponent<SpriteRenderer>();
+        dispatchRenderer = VisualRenderer;
 
         if (dispatchRenderer != null)
         {
@@ -324,5 +326,18 @@ public class SlimeUnit : MonoBehaviour
             dispatchRenderer.enabled = rendererWasEnabled;
 
         return true;
+    }
+    public SpriteRenderer VisualRenderer
+    {
+        get
+        {
+            if (visualRenderer == null)
+            {
+                visualRenderer =
+                    GetComponentInChildren<SpriteRenderer>(true);
+            }
+
+            return visualRenderer;
+        }
     }
 }
