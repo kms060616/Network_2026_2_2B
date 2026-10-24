@@ -37,12 +37,16 @@ MonoBehaviour:
   - id: slime_green
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 34aaac7371f71b04292b0735b39046de, type: 2}
   - id: slime_blue
     sprite: {fileID: 21300000, guid: 02fa0e41590e9d346944112ce0371423, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 34aaac7371f71b04292b0735b39046de, type: 2}
   - id: slime_red
     sprite: {fileID: 21300000, guid: 02fa0e41590e9d346944112ce0371423, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 0}
   - id: slime_yellow
     sprite: {fileID: 21300000, guid: 02fa0e41590e9d346944112ce0371423, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 0}

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7e38d4407d70b4e95bca42e187f896, type: 3}
+  m_Name: Archer_Walk
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyWalkData
+  framesPerSecond: 6
+  down:
+  - {fileID: 1037526577938469808, guid: e06237ccc6b1d7149b829a228a5320b8, type: 3}
+  - {fileID: 7901361700175764545, guid: e06237ccc6b1d7149b829a228a5320b8, type: 3}
+  - {fileID: -7220356466038473884, guid: e06237ccc6b1d7149b829a228a5320b8, type: 3}
+  - {fileID: -3693484704607698052, guid: e06237ccc6b1d7149b829a228a5320b8, type: 3}
+  up:
+  - {fileID: 2743607460555488728, guid: 8ea3e07e9101c194189c4d66a59f0d40, type: 3}
+  - {fileID: -3778914827037929039, guid: 8ea3e07e9101c194189c4d66a59f0d40, type: 3}
+  - {fileID: -706551632687143425, guid: 8ea3e07e9101c194189c4d66a59f0d40, type: 3}
+  - {fileID: 4206822232904743859, guid: 8ea3e07e9101c194189c4d66a59f0d40, type: 3}
+  left:
+  - {fileID: -7657969734379496327, guid: 17869ef9ba270744793928c0333aae53, type: 3}
+  - {fileID: 7892987312476228792, guid: 17869ef9ba270744793928c0333aae53, type: 3}
+  - {fileID: 1254449816496375133, guid: 17869ef9ba270744793928c0333aae53, type: 3}
+  - {fileID: -7406830340019047267, guid: 17869ef9ba270744793928c0333aae53, type: 3}
+  right:
+  - {fileID: -2607258867813821444, guid: ebd1bf94a1ccb2f43861dd1cc4fbd422, type: 3}
+  - {fileID: 6664155303317681724, guid: ebd1bf94a1ccb2f43861dd1cc4fbd422, type: 3}
+  - {fileID: -5070078475679025095, guid: ebd1bf94a1ccb2f43861dd1cc4fbd422, type: 3}
+  - {fileID: -5010877136699253972, guid: ebd1bf94a1ccb2f43861dd1cc4fbd422, type: 3}

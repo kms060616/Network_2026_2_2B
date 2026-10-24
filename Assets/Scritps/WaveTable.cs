@@ -23,6 +23,8 @@ public class WaveAppearance
     public string id;
     public Sprite sprite;
     public Color color = Color.white;
+
+    public EnemyWalkData walkAnimation;
 }
 
 [CreateAssetMenu(

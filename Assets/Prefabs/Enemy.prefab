@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5372986115923863622}
   - component: {fileID: 7308979507391920390}
   - component: {fileID: 3381189448162914087}
+  - component: {fileID: 8035142550071208738}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -156,6 +157,19 @@ MonoBehaviour:
   intensity: 0.75
   flashDuration: 0.08
   minimumFlashInterval: 0.15
+--- !u!114 &8035142550071208738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2649541156563236911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b16cd05d86fbd479633f91af2ed57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyWalkAnimator
+  data: {fileID: 0}
 --- !u!1 &4560145817136976199
 GameObject:
   m_ObjectHideFlags: 0

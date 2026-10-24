@@ -366,6 +366,11 @@ public class WaveManager : MonoBehaviour
 
             renderer.color = appearance.color;
 
+            if (enemy.TryGetComponent(out EnemyWalkAnimator walkAnimator))
+            {
+                walkAnimator.Configure(appearance.walkAnimation);
+            }
+
             EnemyHealth enemyHealth =
                 enemy.GetComponent<EnemyHealth>();
 
