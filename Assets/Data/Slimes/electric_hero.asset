@@ -15,9 +15,10 @@ MonoBehaviour:
   unitName: "\uC601\uC6C5 \uC804\uAE30 \uC2AC\uB77C\uC784"
   element: 3
   grade: 2
-  sprite: {fileID: 0}
-  color: {r: 1, g: 0.85, b: 0.2, a: 1}
+  sprite: {fileID: 21300000, guid: c28e97b20ad61944e8c3d286962ec8a8, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 45
   attackInterval: 0.7
   attackRange: 3.5
   mergeResult: {fileID: 11400000, guid: 50eda19980ab9d441978c3e8ca3a0246, type: 2}
+  skill: {fileID: 0}
