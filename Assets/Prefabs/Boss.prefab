@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: -6587976064046556573}
   - component: {fileID: -7376664818671213193}
   - component: {fileID: 5727445069850929598}
+  - component: {fileID: 7506947427453956451}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -267,10 +268,10 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.7075472, g: 0, b: 0.50477654, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -351,6 +352,19 @@ MonoBehaviour:
   intensity: 0.75
   flashDuration: 0.08
   minimumFlashInterval: 0.15
+--- !u!114 &7506947427453956451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4056124126601952092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b16cd05d86fbd479633f91af2ed57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyWalkAnimator
+  data: {fileID: 11400000, guid: 34aaac7371f71b04292b0735b39046de, type: 2}
 --- !u!1 &8402554782277187784
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +391,7 @@ Transform:
   m_GameObject: {fileID: 8402554782277187784}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8, z: 0}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -1,0 +1,371 @@
+fileFormatVersion: 2
+guid: ef03fb2034bc1bb41a38f940000d3933
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3846670689694731073
+    second: BSlilme_0
+  - first:
+      213: -4979798176503373867
+    second: BSlilme_1
+  - first:
+      213: -2297111184909672392
+    second: BSlilme_2
+  - first:
+      213: -7968556022253030489
+    second: BSlilme_3
+  - first:
+      213: -7698370018401398048
+    second: BSlilme_4
+  - first:
+      213: 9124299851388134083
+    second: BSlilme_5
+  - first:
+      213: 2571635720274664803
+    second: BSlilme_6
+  - first:
+      213: 4824468735172696196
+    second: BSlilme_7
+  - first:
+      213: -7696054516733134257
+    second: BSlilme_8
+  - first:
+      213: -624148007170064293
+    second: BSlilme_9
+  - first:
+      213: -3106254809533662574
+    second: BSlilme_10
+  - first:
+      213: 132129699204652341
+    second: BSlilme_11
+  - first:
+      213: 1588330315831316963
+    second: BSlilme_12
+  - first:
+      213: 1950464632507878311
+    second: BSlilme_13
+  - first:
+      213: -7626412135730204461
+    second: BSlilme_14
+  - first:
+      213: 6421051252414429685
+    second: BSlilme_15
+  - first:
+      213: -3463342254443945480
+    second: BSlilme_16
+  - first:
+      213: -738437688342621789
+    second: BSlilme_17
+  - first:
+      213: 474535196816275292
+    second: BSlilme_18
+  - first:
+      213: 3052725905698683032
+    second: BSlilme_19
+  - first:
+      213: -1327397465960598605
+    second: BSlilme_20
+  - first:
+      213: 7961697338753419373
+    second: BSlilme_21
+  - first:
+      213: 1838062052975880339
+    second: BSlilme_22
+  - first:
+      213: 4073205646528861535
+    second: BSlilme_23
+  - first:
+      213: 5651598647638117455
+    second: BSlilme_24
+  - first:
+      213: -8872583238525809867
+    second: BSlilme_25
+  - first:
+      213: 7813676522003597290
+    second: BSlilme_26
+  - first:
+      213: 1170398864941413543
+    second: BSlilme_27
+  - first:
+      213: 7850310925643042015
+    second: BSlilme_28
+  - first:
+      213: 6206136056152208804
+    second: BSlilme_29
+  - first:
+      213: -2227162068909336982
+    second: BSlilme_30
+  - first:
+      213: -3609328974869045984
+    second: BSlilme_31
+  - first:
+      213: -6137544947254917709
+    second: BSlilme_32
+  - first:
+      213: 3393569506527679498
+    second: BSlilme_33
+  - first:
+      213: 5710232694610957832
+    second: BSlilme_34
+  - first:
+      213: 7143843550308696069
+    second: BSlilme_35
+  - first:
+      213: 5697801863972890938
+    second: BSlilme_36
+  - first:
+      213: 4835886884106451541
+    second: BSlilme_37
+  - first:
+      213: 3804582209003228053
+    second: BSlilme_38
+  - first:
+      213: -7176622745986619986
+    second: BSlilme_39
+  - first:
+      213: 2829991499662700028
+    second: BSlilme_40
+  - first:
+      213: 3225245015301033314
+    second: BSlilme_41
+  - first:
+      213: 2740070501553322157
+    second: BSlilme_42
+  - first:
+      213: 5451603017408334113
+    second: BSlilme_43
+  - first:
+      213: 2862480586263970077
+    second: BSlilme_44
+  - first:
+      213: 8890741053408385572
+    second: BSlilme_45
+  - first:
+      213: -823416961822301486
+    second: BSlilme_46
+  - first:
+      213: -4412252558147297050
+    second: BSlilme_47
+  - first:
+      213: -6900402540420983891
+    second: BSlilme_48
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BSlilme_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 543
+        height: 724
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14b492b9c9e126530800000000000000
+      internalID: 3846670689694731073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BSlilme_1
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 0
+        width: 543
+        height: 724
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dfd06c41f334eab0800000000000000
+      internalID: -4979798176503373867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BSlilme_2
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 0
+        width: 543
+        height: 724
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 830e1e54c850f10e0800000000000000
+      internalID: -2297111184909672392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BSlilme_3
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 0
+        width: 543
+        height: 724
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a3fec854800a6190800000000000000
+      internalID: -7968556022253030489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3ead6f28894d7d649a6f0a2e5b7ff8ca
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":543.0,"y":724.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      BSlilme_0: 3846670689694731073
+      BSlilme_1: -4979798176503373867
+      BSlilme_2: -2297111184909672392
+      BSlilme_3: -7968556022253030489
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

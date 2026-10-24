@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7e38d4407d70b4e95bca42e187f896, type: 3}
+  m_Name: MSlime_Walk
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyWalkData
+  framesPerSecond: 5
+  down:
+  - {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+  - {fileID: 7693484342620161899, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+  - {fileID: 419220546350705480, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+  - {fileID: 3789256480787047234, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+  up:
+  - {fileID: 6628451982813166736, guid: 40cbfc04161741d42a8e3d61b18041eb, type: 3}
+  - {fileID: 314057981987292858, guid: 40cbfc04161741d42a8e3d61b18041eb, type: 3}
+  - {fileID: -7847633760932271944, guid: 40cbfc04161741d42a8e3d61b18041eb, type: 3}
+  - {fileID: 8718036598489834071, guid: 40cbfc04161741d42a8e3d61b18041eb, type: 3}
+  left:
+  - {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+  - {fileID: 7693484342620161899, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+  - {fileID: 419220546350705480, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+  - {fileID: 3789256480787047234, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+  right:
+  - {fileID: 6628451982813166736, guid: 40cbfc04161741d42a8e3d61b18041eb, type: 3}
+  - {fileID: 314057981987292858, guid: 40cbfc04161741d42a8e3d61b18041eb, type: 3}
+  - {fileID: -7847633760932271944, guid: 40cbfc04161741d42a8e3d61b18041eb, type: 3}
+  - {fileID: 8718036598489834071, guid: 40cbfc04161741d42a8e3d61b18041eb, type: 3}

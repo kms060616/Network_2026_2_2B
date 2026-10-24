@@ -6245,7 +6245,7 @@ MonoBehaviour:
   enemyCountText: {fileID: 744319570}
   statusText: {fileID: 600964494}
   bossPrefab: {fileID: 725071742128574166, guid: d80fffecc3de2e44185a07c35378d2c7, type: 3}
-  bossEveryWaves: 10
+  bossEveryWaves: 2
   bossTimeLimit: 180
   firstBossHealth: 300
   bossHealthGrowth: 200
