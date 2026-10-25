@@ -156,6 +156,7 @@ public class SynergyManager : MonoBehaviour
 
         string text = "속성 시너지";
 
+        // 속성별 보유 등급 수와 상태
         for (int i = 0; i < ownedGrades.Length; i++)
         {
             SlimeElement element = (SlimeElement)i;
@@ -169,70 +170,53 @@ public class SynergyManager : MonoBehaviour
                 $"{ownedGrades[i].Count}/3종 · {state}";
         }
 
-        synergyText.text = text;
+        // 활성화된 연계만 추가
+        string comboText = "";
 
-        bool growthActive =
-     IsSynergyActive(SlimeElement.Water) &&
-     IsSynergyActive(SlimeElement.Grass);
-
-        bool steamActive =
-            IsSynergyActive(SlimeElement.Water) &&
-            IsSynergyActive(SlimeElement.Fire);
-
-        bool electricActive =
-            IsSynergyActive(SlimeElement.Water) &&
-            IsSynergyActive(SlimeElement.Electric);
-
-        bool wildfireActive =
-            IsSynergyActive(SlimeElement.Fire) &&
-            IsSynergyActive(SlimeElement.Grass);
-
-        bool explosionActive =
-            IsSynergyActive(SlimeElement.Fire) &&
-            IsSynergyActive(SlimeElement.Electric);
-
-        bool photosynthesisActive =
-            IsSynergyActive(SlimeElement.Grass) &&
-            IsSynergyActive(SlimeElement.Electric);
-
-
-        if (growthActive)
+        if (IsSynergyActive(SlimeElement.Water) &&
+            IsSynergyActive(SlimeElement.Fire))
         {
-            text +=
-                $"\n연계: 성장 · 물/풀 공격속도 +{growthAttackSpeedBonus * 100f:0}%";
+            comboText =
+                $"증기 · 적 이동속도 -{steamSlowAmount * 100f:0}%";
         }
-        else if (steamActive)
+        else if (IsSynergyActive(SlimeElement.Water) &&
+                 IsSynergyActive(SlimeElement.Grass))
         {
-            text +=
-                $"\n연계: 증기 · 적 이동속도 -{steamSlowAmount * 100f:0}%";
+            comboText =
+                $"성장 · 물/풀 공격속도 +{growthAttackSpeedBonus * 100f:0}%";
         }
-        else if (electricActive)
+        else if (IsSynergyActive(SlimeElement.Water) &&
+                 IsSynergyActive(SlimeElement.Electric))
         {
-            text +=
-                $"\n연계: 감전 · 초당 피해 {electricDamagePerSecond:0.##}";
+            comboText =
+                $"감전 · 초당 피해 {electricDamagePerSecond:0.##}";
         }
-        else if (wildfireActive)
+        else if (IsSynergyActive(SlimeElement.Fire) &&
+                 IsSynergyActive(SlimeElement.Grass))
         {
-            text +=
-                $"\n연계: 들불 · 초당 피해 {wildfireDamagePerSecond:0.##}";
+            comboText =
+                $"들불 · 초당 피해 {wildfireDamagePerSecond:0.##}";
         }
-        else if (explosionActive)
+        else if (IsSynergyActive(SlimeElement.Fire) &&
+                 IsSynergyActive(SlimeElement.Electric))
         {
-            text +=
-                $"\n연계: 폭발 · 불/전기 치명타 " +
+            comboText =
+                $"폭발 · 불/전기 치명타 " +
                 $"{explosionCriticalChance * 100f:0}% · " +
                 $"피해 {explosionCriticalMultiplier:0.##}배";
         }
-        else if (photosynthesisActive)
+        else if (IsSynergyActive(SlimeElement.Grass) &&
+                 IsSynergyActive(SlimeElement.Electric))
         {
-            text +=
-                $"\n연계: 광합성 · 풀/전기 마나 회복·" +
-                $"쿨타임 진행속도 +{photosynthesisBonus * 100f:0}%";
+            comboText =
+                $"광합성 · 풀/전기 마나 회복·쿨타임 진행속도 " +
+                $"+{photosynthesisBonus * 100f:0}%";
         }
-        else
-        {
-            text += "\n연계: 없음";
-        }
+
+        if (!string.IsNullOrEmpty(comboText))
+            text += $"\n\n연계: {comboText}";
+
+        synergyText.text = text;
     }
 
     private static string ElementName(SlimeElement element)
