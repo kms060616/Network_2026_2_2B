@@ -21,3 +21,5 @@ MonoBehaviour:
   cooldown: 0
   damageMultiplier: 3
   effectRadius: 1
+  effectPrefab: {fileID: 8730227702585679549, guid: 6e33fb13f049ac74e91b002f5ee58fc7, type: 3}
+  effectColor: {r: 0.3, g: 0.8, b: 1, a: 1}

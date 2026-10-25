@@ -148,6 +148,20 @@ public class SlimeSkillRunner : MonoBehaviour
     {
         cooldownRemaining = Mathf.Max(0f, skill.cooldown);
 
+        if (skill.effectPrefab != null)
+        {
+            SlimeSkillEffect effect = Instantiate(
+                skill.effectPrefab,
+                center,
+                Quaternion.identity
+            );
+
+            effect.Initialize(
+                skill.effectRadius,
+                skill.effectColor
+            );
+        }
+
         float damage = unit.AttackDamage * skill.damageMultiplier;
         float radiusSquared = skill.effectRadius * skill.effectRadius;
         int hitCount = 0;

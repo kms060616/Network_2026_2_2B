@@ -31,4 +31,8 @@ public class SlimeSkillData : ScriptableObject
     [Min(0f)] public float cooldown = 8f;
     [Min(0f)] public float damageMultiplier = 3f;
     [Min(0f)] public float effectRadius = 1f;
+
+    [Header("발동 이펙트")]
+    public SlimeSkillEffect effectPrefab;
+    public Color effectColor = new Color(0.3f, 0.8f, 1f, 1f);
 }
