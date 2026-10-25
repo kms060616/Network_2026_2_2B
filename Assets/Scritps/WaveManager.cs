@@ -17,7 +17,7 @@ public class WaveManager : MonoBehaviour
 
     [Header("적 능력치")]
   
-    [SerializeField, Min(0)] private int goldReward = 10;
+    [SerializeField, Min(0)] private int goldReward = 1;
 
     [Header("패배 조건")]
     [SerializeField, Min(1)] private int enemyLimit = 70;
