@@ -35,4 +35,22 @@ public class SlimeSkillData : ScriptableObject
     [Header("발동 이펙트")]
     public SlimeSkillEffect effectPrefab;
     public Color effectColor = new Color(0.3f, 0.8f, 1f, 1f);
+
+    [Header("효과 종류")]
+    public SkillEffectType effectType = SkillEffectType.AreaDamage;
+
+    [Header("메테오")]
+    public MeteorImpact meteorPrefab;
+
+    [Min(0.01f)]
+    public float meteorFallTime = 0.6f;
+
+    [Min(0f)]
+    public float stunDuration = 1.5f;
+}
+
+public enum SkillEffectType
+{
+    AreaDamage = 0,
+    Meteor = 1
 }

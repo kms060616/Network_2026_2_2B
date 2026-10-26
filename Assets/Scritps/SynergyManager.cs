@@ -12,6 +12,10 @@ public class SynergyManager : MonoBehaviour
     [SerializeField, Min(0f)] private float attackBonus = 0.3f;
     [SerializeField, Range(0f, 1f)] private float attackPenalty = 0.1f;
 
+    [Header("속성 시너지 공격속도")]
+    [SerializeField, Min(0f)]
+    private float synergyAttackSpeedBonus = 0.1f;
+
     [Header("연계 시너지")]
     [SerializeField, Min(0f)]
     private float growthAttackSpeedBonus = 0.2f;
@@ -38,6 +42,8 @@ public class SynergyManager : MonoBehaviour
     [Header("광합성 연계")]
     [SerializeField, Min(0f)]
     private float photosynthesisBonus = 0.2f;
+
+
 
     public float GetSkillSpeedMultiplier(SlimeElement element)
     {
@@ -250,18 +256,25 @@ public class SynergyManager : MonoBehaviour
 
     public float GetAttackSpeedMultiplier(SlimeElement element)
     {
+        float multiplier = 1f;
+
+        // 활성화된 속성의 유닛은 공격속도 +10%
+        if (IsSynergyActive(element))
+            multiplier += synergyAttackSpeedBonus;
+
         bool growthActive =
             IsSynergyActive(SlimeElement.Water) &&
             IsSynergyActive(SlimeElement.Grass);
 
-        bool affectedUnit =
+        bool affectedByGrowth =
             element == SlimeElement.Water ||
             element == SlimeElement.Grass;
 
-        if (growthActive && affectedUnit)
-            return 1f + growthAttackSpeedBonus;
+        // 성장 연계의 공격속도 보너스도 더합니다.
+        if (growthActive && affectedByGrowth)
+            multiplier += growthAttackSpeedBonus;
 
-        return 1f;
+        return multiplier;
     }
 
     public float GetEnemyMoveSpeedMultiplier()

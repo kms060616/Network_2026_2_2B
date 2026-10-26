@@ -220,15 +220,20 @@ public class SlimeUnit : MonoBehaviour
             if (data == null)
                 return 1f;
 
-            float speedMultiplier = SynergyManager.Instance != null
-                ? SynergyManager.Instance.GetAttackSpeedMultiplier(
-                    data.element
-                )
-                : 1f;
+            float upgradeSpeedMultiplier =
+                1f + UpgradeLevel * 0.05f;
+
+            float synergySpeedMultiplier =
+                SynergyManager.Instance != null
+                    ? SynergyManager.Instance.GetAttackSpeedMultiplier(
+                        data.element
+                    )
+                    : 1f;
 
             return Mathf.Max(
                 0.01f,
-                data.attackInterval / speedMultiplier
+                data.attackInterval /
+                (upgradeSpeedMultiplier * synergySpeedMultiplier)
             );
         }
     }

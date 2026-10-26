@@ -43,6 +43,9 @@ public class UnitInfoUI : MonoBehaviour
                 : "정보 보기";
         }
 
+        // 강화 버튼은 정보창 표시 여부와 관계없이 갱신합니다.
+        RefreshUpgradeButton(selected);
+
         bool visible = selected != null && detailsOpen;
         SetVisible(visible);
 
@@ -59,7 +62,7 @@ public class UnitInfoUI : MonoBehaviour
     private void Refresh(SlimeUnit unit)
     {
         SlimeData data = unit.Data;
-        RefreshUpgradeButton(unit);
+        
 
         if (sellButton != null)
         {
@@ -191,7 +194,10 @@ public class UnitInfoUI : MonoBehaviour
     private void RefreshUpgradeButton(SlimeUnit unit)
     {
         bool legendary =
-            unit.Data.grade == SlimeGrade.Legendary;
+            unit != null &&
+            unit.Data != null &&
+            unit.Data.grade == SlimeGrade.Legendary &&
+            !unit.IsDispatched;
 
         if (upgradeButton != null)
         {

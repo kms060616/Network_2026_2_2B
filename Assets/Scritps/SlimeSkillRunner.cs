@@ -147,6 +147,32 @@ public class SlimeSkillRunner : MonoBehaviour
     private void Activate(SlimeSkillData skill, Vector3 center)
     {
         cooldownRemaining = Mathf.Max(0f, skill.cooldown);
+        if (skill.effectType == SkillEffectType.Meteor)
+        {
+            if (skill.meteorPrefab == null)
+            {
+                Debug.LogError("메테오 프리팹을 연결해주세요.", this);
+                return;
+            }
+
+            MeteorImpact meteor = Instantiate(
+                skill.meteorPrefab,
+                center,
+                Quaternion.identity
+            );
+
+            meteor.Initialize(
+                center,
+                unit.AttackDamage * skill.damageMultiplier,
+                skill.effectRadius,
+                skill.stunDuration,
+                skill.meteorFallTime,
+                skill.effectPrefab,
+                skill.effectColor
+            );
+
+            return;
+        }
 
         if (skill.effectPrefab != null)
         {

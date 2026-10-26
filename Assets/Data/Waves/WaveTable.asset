@@ -14,39 +14,163 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveTable
   waves:
   - wave: 1
-    appearanceId: slime_green
-    health: 20
-    goldMultiplier: 1
-  - wave: 2
-    appearanceId: slime_blue
-    health: 25
-    goldMultiplier: 1
-  - wave: 3
-    appearanceId: slime_red
+    appearanceId: wave_1
     health: 30
     goldMultiplier: 1
+  - wave: 2
+    appearanceId: wave_2
+    health: 40
+    goldMultiplier: 1
+  - wave: 3
+    appearanceId: wave_3
+    health: 50
+    goldMultiplier: 1
   - wave: 4
-    appearanceId: slime_green
-    health: 35
+    appearanceId: wave_4
+    health: 55
     goldMultiplier: 1
   - wave: 5
-    appearanceId: slime_yellow
-    health: 45
+    appearanceId: wave_5
+    health: 60
     goldMultiplier: 2
+  - wave: 6
+    appearanceId: wave_6
+    health: 80
+    goldMultiplier: 2
+  - wave: 7
+    appearanceId: wave_7
+    health: 100
+    goldMultiplier: 2
+  - wave: 8
+    appearanceId: wave_8
+    health: 120
+    goldMultiplier: 2
+  - wave: 9
+    appearanceId: wave_9
+    health: 150
+    goldMultiplier: 2
+  - wave: 10
+    appearanceId: wave_10
+    health: 180
+    goldMultiplier: 3
+  - wave: 11
+    appearanceId: wave_11
+    health: 200
+    goldMultiplier: 3
+  - wave: 12
+    appearanceId: wave_12
+    health: 230
+    goldMultiplier: 3
+  - wave: 13
+    appearanceId: wave_13
+    health: 260
+    goldMultiplier: 3
+  - wave: 14
+    appearanceId: wave_14
+    health: 280
+    goldMultiplier: 3
+  - wave: 15
+    appearanceId: wave_15
+    health: 300
+    goldMultiplier: 3
+  - wave: 16
+    appearanceId: wave_16
+    health: 320
+    goldMultiplier: 3
+  - wave: 17
+    appearanceId: wave_17
+    health: 360
+    goldMultiplier: 3
+  - wave: 18
+    appearanceId: wave_18
+    health: 400
+    goldMultiplier: 3
+  - wave: 19
+    appearanceId: wave_19
+    health: 500
+    goldMultiplier: 3
+  - wave: 20
+    appearanceId: wave_20
+    health: 600
+    goldMultiplier: 3
   appearances:
-  - id: slime_green
-    sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - id: wave_1
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
     walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
-  - id: slime_blue
-    sprite: {fileID: 21300000, guid: 02fa0e41590e9d346944112ce0371423, type: 3}
+  - id: wave_2
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
     walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
-  - id: slime_red
-    sprite: {fileID: 21300000, guid: 02fa0e41590e9d346944112ce0371423, type: 3}
+  - id: wave_3
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
-    walkAnimation: {fileID: 0}
-  - id: slime_yellow
-    sprite: {fileID: 21300000, guid: 02fa0e41590e9d346944112ce0371423, type: 3}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_4
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
-    walkAnimation: {fileID: 0}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_5
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_6
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_7
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_8
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_9
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_10
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_11
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_12
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_13
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_14
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_15
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_16
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_17
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_18
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_19
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_20
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}

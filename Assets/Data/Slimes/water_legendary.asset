@@ -17,7 +17,7 @@ MonoBehaviour:
   grade: 3
   sprite: {fileID: 21300000, guid: 8941d9695dc79ae4bb9cadda18b3110b, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
-  attackDamage: 1
+  attackDamage: 60
   attackInterval: 0.8
   attackRange: 3.5
   mergeResult: {fileID: 0}

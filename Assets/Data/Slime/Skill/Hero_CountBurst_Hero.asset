@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8e8b943802e904eb48103c7f51e66a, type: 3}
+  m_Name: Hero_CountBurst_Hero
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeSkillData
+  skillName: "5\uD68C \uACF5\uACA9 \uD3ED\uBC1C"
+  triggerType: 1
+  attacksRequired: 10
+  triggerChance: 0.2
+  manaCost: 100
+  manaRecovery: 10
+  cooldown: 0
+  damageMultiplier: 3
+  effectRadius: 1
+  effectPrefab: {fileID: 8730227702585679549, guid: 6e33fb13f049ac74e91b002f5ee58fc7, type: 3}
+  effectColor: {r: 0.3, g: 0.8, b: 1, a: 1}

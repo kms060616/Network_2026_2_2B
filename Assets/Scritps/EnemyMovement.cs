@@ -7,6 +7,8 @@ public class EnemyMovement : MonoBehaviour
 
     private int targetIndex;
 
+    private EnemyStun stun;
+
     public float CurrentMoveSpeed
     {
         get
@@ -58,6 +60,9 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+        if (stun != null && stun.IsStunned)
+            return;
+
         Vector3 destination = points[targetIndex].position;
 
         transform.position = Vector3.MoveTowards(
@@ -83,5 +88,10 @@ public class EnemyMovement : MonoBehaviour
             $"기본 속도: {moveSpeed}, 현재 속도: {CurrentMoveSpeed}",
             this
         );
+    }
+
+    private void Awake()
+    {
+        stun = GetComponent<EnemyStun>();
     }
 }

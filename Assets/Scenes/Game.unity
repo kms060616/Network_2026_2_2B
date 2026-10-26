@@ -2631,8 +2631,8 @@ MonoBehaviour:
   waveManager: {fileID: 1595857531}
   summoner: {fileID: 1215344945}
   dispatchText: {fileID: 1017812131}
-  firstBossHealth: 300
-  healthGrowth: 1.5
+  firstBossHealth: 400
+  healthGrowth: 2.5
   rewardGold: 100
   respawnDelay: 15
 --- !u!4 &618530641
@@ -5019,22 +5019,10 @@ MonoBehaviour:
   board: {fileID: 117094815}
   slimePrefab: {fileID: -9081012731682744145, guid: 7aa7e8c944c53db44ad6ad77038c71c2, type: 3}
   summonData:
-  - {fileID: 11400000, guid: 04240a435ce118d4988bdbda471238fc, type: 2}
-  - {fileID: 11400000, guid: def7f2d74dc7eac4a81388bf7a3f0c02, type: 2}
-  - {fileID: 11400000, guid: 50eda19980ab9d441978c3e8ca3a0246, type: 2}
-  - {fileID: 11400000, guid: 4b2413bedf186ca4fb26337e944f2438, type: 2}
   - {fileID: 11400000, guid: 0d39af498e1510c4db28b47e85cdbc74, type: 2}
   - {fileID: 11400000, guid: b67f9cd4a3a04364fb0b3b64f13c2e8c, type: 2}
   - {fileID: 11400000, guid: 22fb27dbf40851c43a3796f0e84b7039, type: 2}
   - {fileID: 11400000, guid: d81cc09fce3bd6d469ac2174c117e478, type: 2}
-  - {fileID: 11400000, guid: 6a339f37e4639ed42b210797818a6a57, type: 2}
-  - {fileID: 11400000, guid: 5c9a7978dae274d4481cf18f15f0036a, type: 2}
-  - {fileID: 11400000, guid: 8278226866f3e344aa3a9c03f06ac869, type: 2}
-  - {fileID: 11400000, guid: 7606edbba33acf84ca807036b467b1ca, type: 2}
-  - {fileID: 11400000, guid: 4c6f3336c26f2554babc654fb7a71713, type: 2}
-  - {fileID: 11400000, guid: e5ea5a142cf229b4882e110d035b6683, type: 2}
-  - {fileID: 11400000, guid: 20ef2da75d9c27943805c67603645ea2, type: 2}
-  - {fileID: 11400000, guid: 36f37e40857abc74690233483c03f74b, type: 2}
   goldText: {fileID: 1722607288}
   startingGold: 100
   summonCost: 1
@@ -6505,21 +6493,21 @@ MonoBehaviour:
   - {fileID: 944995598}
   - {fileID: 369965260}
   - {fileID: 1909488534}
-  totalWaves: 5
+  totalWaves: 20
   preparationTime: 3
   waveInterval: 10
   spawnInterval: 1
   goldReward: 1
-  enemyLimit: 70
+  enemyLimit: 60
   waveText: {fileID: 1489268866}
   enemyCountText: {fileID: 744319570}
   statusText: {fileID: 600964494}
   bossPrefab: {fileID: 725071742128574166, guid: d80fffecc3de2e44185a07c35378d2c7, type: 3}
-  bossEveryWaves: 2
+  bossEveryWaves: 10
   bossTimeLimit: 180
-  firstBossHealth: 300
-  bossHealthGrowth: 200
-  bossGoldReward: 100
+  firstBossHealth: 2000
+  bossHealthGrowth: 5000
+  bossGoldReward: 50
   bossText: {fileID: 148217804}
   resultUI: {fileID: 2024327229}
   waveManager: {fileID: 1595857531}
@@ -8880,15 +8868,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SynergyManager
   board: {fileID: 117094815}
   synergyText: {fileID: 673456939}
-  attackBonus: 0.3
-  attackPenalty: 0.1
-  growthAttackSpeedBonus: 0.2
+  attackBonus: 0.5
+  attackPenalty: 0.2
+  synergyAttackSpeedBonus: 0.1
+  growthAttackSpeedBonus: 0.3
   steamSlowAmount: 0.2
-  electricDamagePerSecond: 5
+  electricDamagePerSecond: 7
   wildfireDamagePerSecond: 8
   explosionCriticalChance: 0.2
-  explosionCriticalMultiplier: 2
-  photosynthesisBonus: 0.2
+  explosionCriticalMultiplier: 5
+  photosynthesisBonus: 0.8
 --- !u!4 &2127614210
 Transform:
   m_ObjectHideFlags: 0
