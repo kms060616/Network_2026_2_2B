@@ -26,7 +26,18 @@ MonoBehaviour:
   effectType: 2
   meteorPrefab: {fileID: 0}
   meteorFallTime: 0.6
-  stunDuration: 0.5
+  stunDuration: 0.8
   groundAreaPrefab: {fileID: 7601456735400834908, guid: bb1b05ef48ef06047ab78969a02f3960, type: 3}
   groundDuration: 4
   groundTickInterval: 0.5
+  chainLightningPrefab: {fileID: 0}
+  chainTargetCount: 5
+  chainJumpRange: 1.5
+  chainDamageRetention: 0.8
+  chainJumpDelay: 0.07
+  chainStunDuration: 0.1
+  waterBombPrefab: {fileID: 0}
+  waterDropletCount: 3
+  waterDropletDamageMultiplier: 0.5
+  waterDropletSearchRadius: 4
+  waterFollowUpDelay: 0.15

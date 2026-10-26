@@ -3144,7 +3144,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 20G
+  m_text: "\uC2AC\uB77C\uC784\uBF51\uAE30\n25G"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 373acc1203cdd6d41a0610aa111f5419, type: 2}
   m_sharedMaterial: {fileID: 8167028330541892671, guid: 373acc1203cdd6d41a0610aa111f5419, type: 2}
@@ -3171,8 +3171,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -5023,9 +5023,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: def7f2d74dc7eac4a81388bf7a3f0c02, type: 2}
   - {fileID: 11400000, guid: 50eda19980ab9d441978c3e8ca3a0246, type: 2}
   - {fileID: 11400000, guid: 4b2413bedf186ca4fb26337e944f2438, type: 2}
+  - {fileID: 11400000, guid: 0d39af498e1510c4db28b47e85cdbc74, type: 2}
+  - {fileID: 11400000, guid: b67f9cd4a3a04364fb0b3b64f13c2e8c, type: 2}
+  - {fileID: 11400000, guid: 22fb27dbf40851c43a3796f0e84b7039, type: 2}
+  - {fileID: 11400000, guid: d81cc09fce3bd6d469ac2174c117e478, type: 2}
+  - {fileID: 11400000, guid: 6a339f37e4639ed42b210797818a6a57, type: 2}
+  - {fileID: 11400000, guid: 5c9a7978dae274d4481cf18f15f0036a, type: 2}
+  - {fileID: 11400000, guid: 8278226866f3e344aa3a9c03f06ac869, type: 2}
+  - {fileID: 11400000, guid: 7606edbba33acf84ca807036b467b1ca, type: 2}
+  - {fileID: 11400000, guid: 4c6f3336c26f2554babc654fb7a71713, type: 2}
+  - {fileID: 11400000, guid: e5ea5a142cf229b4882e110d035b6683, type: 2}
+  - {fileID: 11400000, guid: 20ef2da75d9c27943805c67603645ea2, type: 2}
+  - {fileID: 11400000, guid: 36f37e40857abc74690233483c03f74b, type: 2}
   goldText: {fileID: 1722607288}
   startingGold: 100
-  summonCost: 1
+  summonCost: 25
   waveManager: {fileID: 1595857531}
 --- !u!4 &1215344946
 Transform:

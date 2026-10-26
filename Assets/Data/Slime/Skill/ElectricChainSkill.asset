@@ -15,7 +15,7 @@ MonoBehaviour:
   skillName: "\uC5F0\uC1C4 \uBC88\uAC1C"
   triggerType: 2
   attacksRequired: 5
-  triggerChance: 0.2
+  triggerChance: 1
   manaCost: 100
   manaRecovery: 10
   cooldown: 1
@@ -35,3 +35,4 @@ MonoBehaviour:
   chainJumpRange: 1.5
   chainDamageRetention: 0.8
   chainJumpDelay: 0.07
+  chainStunDuration: 0.5

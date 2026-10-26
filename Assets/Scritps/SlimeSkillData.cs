@@ -71,6 +71,24 @@ public class SlimeSkillData : ScriptableObject
 
     [Min(0.01f)]
     public float chainJumpDelay = 0.07f;
+
+    [Min(0f)]
+    public float chainStunDuration = 0.1f;
+
+    [Header("물폭탄")]
+    public WaterBombSkill waterBombPrefab;
+
+    [Min(0)]
+    public int waterDropletCount = 3;
+
+    [Min(0f)]
+    public float waterDropletDamageMultiplier = 0.5f;
+
+    [Min(0f)]
+    public float waterDropletSearchRadius = 4f;
+
+    [Min(0f)]
+    public float waterFollowUpDelay = 0.15f;
 }
 
 public enum SkillEffectType
@@ -78,5 +96,6 @@ public enum SkillEffectType
     AreaDamage = 0,
     Meteor = 1,
     GroundArea = 2,
-    ChainLightning = 3
+    ChainLightning = 3,
+    WaterBomb = 4
 }

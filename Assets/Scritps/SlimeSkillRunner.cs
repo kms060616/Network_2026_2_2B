@@ -153,6 +153,36 @@ public class SlimeSkillRunner : MonoBehaviour
     {
         cooldownRemaining = Mathf.Max(0f, skill.cooldown);
 
+        if (skill.effectType == SkillEffectType.WaterBomb)
+        {
+            if (skill.waterBombPrefab == null)
+            {
+                Debug.LogError("물폭탄 프리팹을 연결해주세요.", this);
+                return;
+            }
+
+            WaterBombSkill waterBomb = Instantiate(
+                skill.waterBombPrefab,
+                center,
+                Quaternion.identity
+            );
+
+            waterBomb.Initialize(
+                center,
+                unit.AttackDamage,
+                skill.damageMultiplier,
+                skill.effectRadius,
+                skill.waterDropletCount,
+                skill.waterDropletDamageMultiplier,
+                skill.waterDropletSearchRadius,
+                skill.waterFollowUpDelay,
+                skill.effectPrefab,
+                skill.effectColor
+            );
+
+            return;
+        }
+
         if (skill.effectType == SkillEffectType.ChainLightning)
         {
             if (skill.chainLightningPrefab == null)
@@ -174,15 +204,16 @@ public class SlimeSkillRunner : MonoBehaviour
             );
 
             chain.Initialize(
-                transform.position,
-                primaryTarget,
-                unit.AttackDamage * skill.damageMultiplier,
-                skill.chainTargetCount,
-                skill.chainJumpRange,
-                skill.chainDamageRetention,
-                skill.chainJumpDelay,
-                skill.effectColor
-            );
+    transform.position,
+    primaryTarget,
+    unit.AttackDamage * skill.damageMultiplier,
+    skill.chainTargetCount,
+    skill.chainJumpRange,
+    skill.chainDamageRetention,
+    skill.chainJumpDelay,
+    skill.effectColor,
+    skill.chainStunDuration
+);
 
             return;
         }

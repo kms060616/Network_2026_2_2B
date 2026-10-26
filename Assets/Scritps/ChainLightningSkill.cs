@@ -7,17 +7,21 @@ public class ChainLightningSkill : MonoBehaviour
     [SerializeField] private LightningBolt boltPrefab;
 
     private readonly HashSet<EnemyHealth> visited = new();
+    private float stunDuration;
 
     public void Initialize(
-        Vector3 origin,
-        EnemyHealth firstTarget,
-        float firstDamage,
-        int maximumTargets,
-        float jumpRange,
-        float damageRetention,
-        float jumpDelay,
-        Color color)
+    Vector3 origin,
+    EnemyHealth firstTarget,
+    float firstDamage,
+    int maximumTargets,
+    float jumpRange,
+    float damageRetention,
+    float jumpDelay,
+    Color color,
+    float stunTime)
     {
+        stunDuration = Mathf.Max(0f, stunTime);
+
         StartCoroutine(Execute(
             origin,
             firstTarget,
@@ -74,6 +78,13 @@ public class ChainLightningSkill : MonoBehaviour
             }
 
             target.TakeDamage(damage);
+
+            if (!target.IsDead &&
+    stunDuration > 0f &&
+    target.TryGetComponent(out EnemyStun stun))
+            {
+                stun.ApplyStun(stunDuration);
+            }
 
             previousHit = hitPosition;
             hasHit = true;
