@@ -47,10 +47,36 @@ public class SlimeSkillData : ScriptableObject
 
     [Min(0f)]
     public float stunDuration = 1.5f;
+
+    [Header("장판")]
+    public GroundSkillArea groundAreaPrefab;
+
+    [Min(0.1f)]
+    public float groundDuration = 4f;
+
+    [Min(0.1f)]
+    public float groundTickInterval = 0.5f;
+
+    [Header("연쇄 번개")]
+    public ChainLightningSkill chainLightningPrefab;
+
+    [Min(1)]
+    public int chainTargetCount = 5;
+
+    [Min(0.1f)]
+    public float chainJumpRange = 1.5f;
+
+    [Range(0f, 1f)]
+    public float chainDamageRetention = 0.8f;
+
+    [Min(0.01f)]
+    public float chainJumpDelay = 0.07f;
 }
 
 public enum SkillEffectType
 {
     AreaDamage = 0,
-    Meteor = 1
+    Meteor = 1,
+    GroundArea = 2,
+    ChainLightning = 3
 }

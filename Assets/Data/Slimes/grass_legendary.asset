@@ -21,4 +21,4 @@ MonoBehaviour:
   attackInterval: 0.5
   attackRange: 3
   mergeResult: {fileID: 0}
-  skill: {fileID: 11400000, guid: 6777a18150d3d5549900443dd6c0b383, type: 2}
+  skill: {fileID: 11400000, guid: 7ca132292a2f224479a951731627f65a, type: 2}

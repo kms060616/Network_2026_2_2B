@@ -100,7 +100,13 @@ public class SlimeAttack : MonoBehaviour
 
         // 공격 횟수·확률 스킬은 발사 시점을 기준으로 판정합니다.
         if (skillRunner != null)
-            skillRunner.NotifyBasicAttack(targetPosition);
+        {
+            skillRunner.NotifyBasicAttack(
+                targetPosition,
+                target
+            );
+        }
+        skillRunner.NotifyBasicAttack(targetPosition);
     }
 
     private bool IsValidTarget(EnemyHealth enemy, float range)

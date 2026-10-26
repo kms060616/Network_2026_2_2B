@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7308979507391920390}
   - component: {fileID: 3381189448162914087}
   - component: {fileID: 8035142550071208738}
+  - component: {fileID: 8693542462106332160}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -170,6 +171,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyWalkAnimator
   data: {fileID: 0}
+--- !u!114 &8693542462106332160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2649541156563236911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7053c29313eedb1438ad79cc6c231905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStun
 --- !u!1 &4560145817136976199
 GameObject:
   m_ObjectHideFlags: 0

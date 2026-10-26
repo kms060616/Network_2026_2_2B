@@ -103,11 +103,13 @@ public class SlimeSkillRunner : MonoBehaviour
             return;
 
         mana -= cost;
-        Activate(skill, target.transform.position);
+        Activate(skill, target.transform.position, target);
     }
 
     // SlimeAttack이 실제 기본 공격을 한 직후 호출합니다.
-    public void NotifyBasicAttack(Vector3 targetPosition)
+    public void NotifyBasicAttack(
+    Vector3 targetPosition,
+    EnemyHealth attackTarget = null)
     {
         if (unit.IsDispatched)
             return;
@@ -131,7 +133,7 @@ public class SlimeSkillRunner : MonoBehaviour
             if (attackCount >= required && cooldownRemaining <= 0f)
             {
                 attackCount = 0;
-                Activate(skill, targetPosition);
+                Activate(skill, targetPosition, attackTarget);
             }
         }
         else if (skill.triggerType == SkillTriggerType.Chance)
@@ -139,14 +141,94 @@ public class SlimeSkillRunner : MonoBehaviour
             if (cooldownRemaining <= 0f &&
                 Random.value < skill.triggerChance)
             {
-                Activate(skill, targetPosition);
+                Activate(skill, targetPosition, attackTarget);
             }
         }
     }
 
-    private void Activate(SlimeSkillData skill, Vector3 center)
+    private void Activate(
+    SlimeSkillData skill,
+    Vector3 center,
+    EnemyHealth primaryTarget = null)
     {
         cooldownRemaining = Mathf.Max(0f, skill.cooldown);
+
+        if (skill.effectType == SkillEffectType.ChainLightning)
+        {
+            if (skill.chainLightningPrefab == null)
+            {
+                Debug.LogError("연쇄 번개 프리팹을 연결해주세요.", this);
+                return;
+            }
+
+            if (primaryTarget == null || primaryTarget.IsDead)
+                primaryTarget = FindNearestEnemy(unit.Data.attackRange);
+
+            if (primaryTarget == null)
+                return;
+
+            ChainLightningSkill chain = Instantiate(
+                skill.chainLightningPrefab,
+                transform.position,
+                Quaternion.identity
+            );
+
+            chain.Initialize(
+                transform.position,
+                primaryTarget,
+                unit.AttackDamage * skill.damageMultiplier,
+                skill.chainTargetCount,
+                skill.chainJumpRange,
+                skill.chainDamageRetention,
+                skill.chainJumpDelay,
+                skill.effectColor
+            );
+
+            return;
+        }
+
+        if (skill.effectType == SkillEffectType.GroundArea)
+        {
+            if (skill.groundAreaPrefab == null)
+            {
+                Debug.LogError("장판 프리팹을 연결해주세요.", this);
+                return;
+            }
+
+            GroundSkillArea area = Instantiate(
+                skill.groundAreaPrefab,
+                center,
+                Quaternion.identity
+            );
+
+            area.Initialize(
+    center,
+    unit.AttackDamage * skill.damageMultiplier,
+    skill.effectRadius,
+    skill.groundDuration,
+    skill.groundTickInterval,
+    skill.stunDuration,
+    skill.effectColor,
+    skill.effectPrefab
+);
+            if (skill.effectPrefab != null)
+            {
+                SlimeSkillEffect effect = Instantiate(
+                    skill.effectPrefab,
+                    center,
+                    Quaternion.identity
+                );
+
+                effect.Initialize(
+                    skill.effectRadius,
+                    skill.effectColor
+                );
+            }
+
+
+                return;
+        }
+
         if (skill.effectType == SkillEffectType.Meteor)
         {
             if (skill.meteorPrefab == null)
@@ -174,19 +256,7 @@ public class SlimeSkillRunner : MonoBehaviour
             return;
         }
 
-        if (skill.effectPrefab != null)
-        {
-            SlimeSkillEffect effect = Instantiate(
-                skill.effectPrefab,
-                center,
-                Quaternion.identity
-            );
-
-            effect.Initialize(
-                skill.effectRadius,
-                skill.effectColor
-            );
-        }
+        
 
         float damage = unit.AttackDamage * skill.damageMultiplier;
         float radiusSquared = skill.effectRadius * skill.effectRadius;

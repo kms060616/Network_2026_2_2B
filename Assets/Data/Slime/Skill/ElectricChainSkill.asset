@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8e8b943802e904eb48103c7f51e66a, type: 3}
+  m_Name: ElectricChainSkill
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeSkillData
+  skillName: "\uC5F0\uC1C4 \uBC88\uAC1C"
+  triggerType: 2
+  attacksRequired: 5
+  triggerChance: 0.2
+  manaCost: 100
+  manaRecovery: 10
+  cooldown: 1
+  damageMultiplier: 2
+  effectRadius: 1
+  effectPrefab: {fileID: 8730227702585679549, guid: e1cb231e383d5a647a205c67199ba783, type: 3}
+  effectColor: {r: 1, g: 1, b: 1, a: 1}
+  effectType: 3
+  meteorPrefab: {fileID: 0}
+  meteorFallTime: 0.6
+  stunDuration: 1.5
+  groundAreaPrefab: {fileID: 0}
+  groundDuration: 4
+  groundTickInterval: 0.5
+  chainLightningPrefab: {fileID: 6383604121863234087, guid: 5d1f69bfe611d2d47a213380210e89d9, type: 3}
+  chainTargetCount: 5
+  chainJumpRange: 1.5
+  chainDamageRetention: 0.8
+  chainJumpDelay: 0.07
