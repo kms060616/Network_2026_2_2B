@@ -17,9 +17,27 @@ MonoBehaviour:
   attacksRequired: 5
   triggerChance: 0.2
   manaCost: 100
-  manaRecovery: 3
+  manaRecovery: 20
   cooldown: 8
   damageMultiplier: 3
   effectRadius: 1
   effectPrefab: {fileID: 8730227702585679549, guid: 0d45ffce8fff0b64cb09eae49c422b3c, type: 3}
   effectColor: {r: 0.36424476, g: 1, b: 0.2980392, a: 1}
+  effectType: 0
+  meteorPrefab: {fileID: 0}
+  meteorFallTime: 0.6
+  stunDuration: 1.5
+  groundAreaPrefab: {fileID: 0}
+  groundDuration: 4
+  groundTickInterval: 0.5
+  chainLightningPrefab: {fileID: 0}
+  chainTargetCount: 5
+  chainJumpRange: 1.5
+  chainDamageRetention: 0.8
+  chainJumpDelay: 0.07
+  chainStunDuration: 0.1
+  waterBombPrefab: {fileID: 0}
+  waterDropletCount: 3
+  waterDropletDamageMultiplier: 0.5
+  waterDropletSearchRadius: 4
+  waterFollowUpDelay: 0.15

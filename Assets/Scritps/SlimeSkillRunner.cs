@@ -242,19 +242,7 @@ public class SlimeSkillRunner : MonoBehaviour
     skill.effectColor,
     skill.effectPrefab
 );
-            if (skill.effectPrefab != null)
-            {
-                SlimeSkillEffect effect = Instantiate(
-                    skill.effectPrefab,
-                    center,
-                    Quaternion.identity
-                );
-
-                effect.Initialize(
-                    skill.effectRadius,
-                    skill.effectColor
-                );
-            }
+            
 
 
                 return;
@@ -287,7 +275,20 @@ public class SlimeSkillRunner : MonoBehaviour
             return;
         }
 
-        
+        if (skill.effectPrefab != null)
+        {
+            SlimeSkillEffect effect = Instantiate(
+                skill.effectPrefab,
+                center,
+                Quaternion.identity
+            );
+
+            effect.Initialize(
+                skill.effectRadius,
+                skill.effectColor
+            );
+        }
+
 
         float damage = unit.AttackDamage * skill.damageMultiplier;
         float radiusSquared = skill.effectRadius * skill.effectRadius;

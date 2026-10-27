@@ -31,67 +31,107 @@ MonoBehaviour:
     goldMultiplier: 1
   - wave: 5
     appearanceId: wave_5
-    health: 60
-    goldMultiplier: 2
+    health: 80
+    goldMultiplier: 1
   - wave: 6
     appearanceId: wave_6
-    health: 80
-    goldMultiplier: 2
+    health: 100
+    goldMultiplier: 1
   - wave: 7
     appearanceId: wave_7
-    health: 100
-    goldMultiplier: 2
+    health: 120
+    goldMultiplier: 1
   - wave: 8
     appearanceId: wave_8
-    health: 120
-    goldMultiplier: 2
+    health: 150
+    goldMultiplier: 1
   - wave: 9
     appearanceId: wave_9
-    health: 150
-    goldMultiplier: 2
+    health: 180
+    goldMultiplier: 1
   - wave: 10
     appearanceId: wave_10
-    health: 180
-    goldMultiplier: 3
+    health: 200
+    goldMultiplier: 2
   - wave: 11
     appearanceId: wave_11
-    health: 200
-    goldMultiplier: 3
+    health: 230
+    goldMultiplier: 2
   - wave: 12
     appearanceId: wave_12
-    health: 230
-    goldMultiplier: 3
+    health: 260
+    goldMultiplier: 2
   - wave: 13
     appearanceId: wave_13
-    health: 260
-    goldMultiplier: 3
+    health: 280
+    goldMultiplier: 2
   - wave: 14
     appearanceId: wave_14
-    health: 280
-    goldMultiplier: 3
+    health: 300
+    goldMultiplier: 2
   - wave: 15
     appearanceId: wave_15
-    health: 300
-    goldMultiplier: 3
+    health: 320
+    goldMultiplier: 2
   - wave: 16
     appearanceId: wave_16
-    health: 320
-    goldMultiplier: 3
+    health: 360
+    goldMultiplier: 2
   - wave: 17
     appearanceId: wave_17
-    health: 360
-    goldMultiplier: 3
+    health: 380
+    goldMultiplier: 2
   - wave: 18
     appearanceId: wave_18
     health: 400
-    goldMultiplier: 3
+    goldMultiplier: 2
   - wave: 19
     appearanceId: wave_19
     health: 500
-    goldMultiplier: 3
+    goldMultiplier: 2
   - wave: 20
     appearanceId: wave_20
     health: 600
+    goldMultiplier: 2
+  - wave: 21
+    appearanceId: wave_21
+    health: 650
+    goldMultiplier: 3
+  - wave: 22
+    appearanceId: wave_22
+    health: 700
+    goldMultiplier: 3
+  - wave: 23
+    appearanceId: wave_23
+    health: 750
+    goldMultiplier: 3
+  - wave: 24
+    appearanceId: wave_24
+    health: 780
+    goldMultiplier: 3
+  - wave: 25
+    appearanceId: wave_25
+    health: 800
+    goldMultiplier: 3
+  - wave: 26
+    appearanceId: wave_26
+    health: 850
+    goldMultiplier: 3
+  - wave: 27
+    appearanceId: wave_27
+    health: 880
+    goldMultiplier: 3
+  - wave: 28
+    appearanceId: wave_28
+    health: 900
+    goldMultiplier: 3
+  - wave: 29
+    appearanceId: wave_29
+    health: 1000
+    goldMultiplier: 3
+  - wave: 30
+    appearanceId: wave_30
+    health: 1100
     goldMultiplier: 3
   appearances:
   - id: wave_1
@@ -171,6 +211,46 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
   - id: wave_20
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_21
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_22
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_23
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_24
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_25
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_26
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_27
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_28
+    sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}
+  - id: wave_29
+    sprite: {fileID: -5187492883254658217, guid: dd7d04951d65c9742bc52510fe323b48, type: 3}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    walkAnimation: {fileID: 11400000, guid: 0e09e08f73cf7c440a77c04646307b86, type: 2}
+  - id: wave_30
     sprite: {fileID: 3846670689694731073, guid: ef03fb2034bc1bb41a38f940000d3933, type: 3}
     color: {r: 1, g: 1, b: 1, a: 1}
     walkAnimation: {fileID: 11400000, guid: b8072dee4c7b3294d8548daf03dcc734, type: 2}

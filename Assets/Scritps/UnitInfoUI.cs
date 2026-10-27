@@ -130,8 +130,8 @@ public class UnitInfoUI : MonoBehaviour
                 $"공격 시 발동 확률: {skill.triggerChance * 100f:0.#}%",
 
             SkillTriggerType.Mana =>
-                $"마나: {runner.CurrentMana:0.#}/" +
-                $"{Mathf.Max(1f, skill.manaCost):0.#}",
+    $"마나: {Mathf.FloorToInt(runner.CurrentMana)}/" +
+    $"{Mathf.Max(1f, skill.manaCost):0}",
 
             _ => ""
         };

@@ -26,9 +26,9 @@ MonoBehaviour:
   effectType: 2
   meteorPrefab: {fileID: 0}
   meteorFallTime: 0.6
-  stunDuration: 0.8
+  stunDuration: 0.4
   groundAreaPrefab: {fileID: 7601456735400834908, guid: bb1b05ef48ef06047ab78969a02f3960, type: 3}
-  groundDuration: 4
+  groundDuration: 2
   groundTickInterval: 0.5
   chainLightningPrefab: {fileID: 0}
   chainTargetCount: 5

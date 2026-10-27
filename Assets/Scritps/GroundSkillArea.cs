@@ -55,7 +55,7 @@ public class GroundSkillArea : MonoBehaviour
         // 생성 시 범위 안의 적에게 첫 피해와 스턴을 적용합니다.
         EnemyHealth[] enemies = FindEnemies();
 
-        ApplyEntryStuns(enemies);
+        
 
         tickEffectPrefab = effectPrefab;
         tickEffectColor = color;
@@ -73,8 +73,7 @@ public class GroundSkillArea : MonoBehaviour
 
         EnemyHealth[] enemies = FindEnemies();
 
-        if (elapsed < duration)
-            ApplyEntryStuns(enemies);
+        
 
         // 생성 직후 피해와 중복되지 않도록 다음 주기부터 처리합니다.
         while (nextTickTime <= elapsed &&
@@ -147,8 +146,17 @@ public class GroundSkillArea : MonoBehaviour
 
         foreach (EnemyHealth enemy in enemies)
         {
-            if (IsInside(enemy))
-                enemy.TakeDamage(damagePerTick);
+            if (!IsInside(enemy))
+                continue;
+
+            enemy.TakeDamage(damagePerTick);
+
+            if (!enemy.IsDead &&
+                stunDuration > 0f &&
+                enemy.TryGetComponent(out EnemyStun stun))
+            {
+                stun.ApplyStun(stunDuration);
+            }
         }
     }
 
