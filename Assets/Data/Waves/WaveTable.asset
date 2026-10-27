@@ -75,15 +75,15 @@ MonoBehaviour:
     goldMultiplier: 2
   - wave: 16
     appearanceId: wave_16
-    health: 360
+    health: 400
     goldMultiplier: 2
   - wave: 17
     appearanceId: wave_17
-    health: 380
+    health: 450
     goldMultiplier: 2
   - wave: 18
     appearanceId: wave_18
-    health: 400
+    health: 480
     goldMultiplier: 2
   - wave: 19
     appearanceId: wave_19
@@ -95,43 +95,43 @@ MonoBehaviour:
     goldMultiplier: 2
   - wave: 21
     appearanceId: wave_21
-    health: 650
+    health: 700
     goldMultiplier: 3
   - wave: 22
     appearanceId: wave_22
-    health: 700
+    health: 800
     goldMultiplier: 3
   - wave: 23
     appearanceId: wave_23
-    health: 750
+    health: 850
     goldMultiplier: 3
   - wave: 24
     appearanceId: wave_24
-    health: 780
+    health: 950
     goldMultiplier: 3
   - wave: 25
     appearanceId: wave_25
-    health: 800
+    health: 1000
     goldMultiplier: 3
   - wave: 26
     appearanceId: wave_26
-    health: 850
+    health: 1100
     goldMultiplier: 3
   - wave: 27
     appearanceId: wave_27
-    health: 880
+    health: 1200
     goldMultiplier: 3
   - wave: 28
     appearanceId: wave_28
-    health: 900
+    health: 1500
     goldMultiplier: 3
   - wave: 29
     appearanceId: wave_29
-    health: 1000
+    health: 1800
     goldMultiplier: 3
   - wave: 30
     appearanceId: wave_30
-    health: 1100
+    health: 2000
     goldMultiplier: 3
   appearances:
   - id: wave_1

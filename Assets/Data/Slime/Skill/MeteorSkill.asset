@@ -19,7 +19,7 @@ MonoBehaviour:
   manaCost: 100
   manaRecovery: 20
   cooldown: 5
-  damageMultiplier: 5
+  damageMultiplier: 3
   effectRadius: 1
   effectPrefab: {fileID: 8730227702585679549, guid: ff20aa11d463b99418a8a4789a59cbec, type: 3}
   effectColor: {r: 1, g: 1, b: 1, a: 1}
