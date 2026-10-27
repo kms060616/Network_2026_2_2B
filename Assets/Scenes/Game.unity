@@ -6505,7 +6505,7 @@ MonoBehaviour:
   - {fileID: 944995598}
   - {fileID: 369965260}
   - {fileID: 1909488534}
-  totalWaves: 20
+  totalWaves: 30
   preparationTime: 3
   waveInterval: 10
   spawnInterval: 1
